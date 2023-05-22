@@ -29,6 +29,6 @@ func (dao *UserDao) FindByName(name string) ([]model.User, error) {
 }
 
 func (dao *UserDao) Insert(user model.User) error {
-	_, err := dao.DB.Exec("INSERT into user VALUES(?, ?, ?)", user.Id, user.Name, user.Age)
+	_, err := dao.DB.Exec("INSERT into user_2 VALUES(?, ?, ?)", user.Id, user.Name, user.Age)
 	return err
 }
