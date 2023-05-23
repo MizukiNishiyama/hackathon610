@@ -64,7 +64,7 @@ func initDB() *sql.DB {
 	//mysqlHost := "34.27.193.191:3306"
 	//mysqlDatabase := "hackathon"
 
-	connStr := fmt.Sprintf("%s:%s@tcp(%s)/%s", mysqlUser, mysqlPwd, mysqlHost, mysqlDatabase)
+	connStr := fmt.Sprintf("%s:%s@%s/%s", mysqlUser, mysqlPwd, mysqlHost, mysqlDatabase)
 
 	_db, err := sql.Open("mysql", connStr)
 
