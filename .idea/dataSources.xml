@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="CloudSQL" uuid="6da5a7d9-dbf8-4e60-b3db-e41c8c19732e">
+    <data-source source="LOCAL" name="CloudSQL" uuid="edc76ee8-54e2-432c-992d-9db60a5356de">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://34.172.193.162:3306/hackathon</jdbc-url>
+      <jdbc-url>jdbc:mysql://34.27.193.191:3306/hackathon</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
