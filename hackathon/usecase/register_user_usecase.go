@@ -2,8 +2,8 @@ package usecase
 
 import (
 	"github.com/oklog/ulid/v2"
-	"sourse/dao"
-	"sourse/model"
+	"hackathon/dao"
+	"hackathon/model"
 )
 
 type RegisterUserUseCase struct {

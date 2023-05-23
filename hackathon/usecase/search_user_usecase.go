@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"sourse/dao"
-	"sourse/model"
+	"hackathon/dao"
+	"hackathon/model"
 )
 
 type SearchUserUseCase struct {

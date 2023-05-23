@@ -3,13 +3,13 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"hackathon/controller"
+	"hackathon/dao"
+	"hackathon/usecase"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
-	"sourse/controller"
-	"sourse/dao"
-	"sourse/usecase"
 	"syscall"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -61,7 +61,8 @@ func initDB() *sql.DB {
 
 	mysqlUser := "root"
 	mysqlPwd := "ramen102"
-	mysqlHost := "34.172.193.162"
+	//mysqlHost := "34.172.193.162:3306"
+	mysqlHost := "34.27.193.191:3306"
 	mysqlDatabase := "hackathon"
 
 	connStr := fmt.Sprintf("%s:%s@tcp(%s)/%s", mysqlUser, mysqlPwd, mysqlHost, mysqlDatabase)

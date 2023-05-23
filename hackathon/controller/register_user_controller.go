@@ -2,11 +2,11 @@ package controller
 
 import (
 	"encoding/json"
+	"hackathon/model"
+	"hackathon/usecase"
 	"io"
 	"log"
 	"net/http"
-	"sourse/model"
-	"sourse/usecase"
 )
 
 type RegisterUserController struct {

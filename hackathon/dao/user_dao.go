@@ -3,7 +3,7 @@ package dao
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
-	"sourse/model"
+	"hackathon/model"
 )
 
 type UserDao struct {

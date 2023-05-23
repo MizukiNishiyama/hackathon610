@@ -1,4 +1,4 @@
-module sourse
+module hackathon
 
 go 1.20
 

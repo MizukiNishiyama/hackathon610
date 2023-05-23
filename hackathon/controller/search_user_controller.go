@@ -2,10 +2,10 @@ package controller
 
 import (
 	"encoding/json"
+	"hackathon/model"
+	"hackathon/usecase"
 	"log"
 	"net/http"
-	"sourse/model"
-	"sourse/usecase"
 )
 
 type SearchUserController struct {
