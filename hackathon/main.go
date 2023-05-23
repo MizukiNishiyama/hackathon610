@@ -59,7 +59,7 @@ func initDB() *sql.DB {
 	//mysqlHost := os.Getenv("MYSQL_HOST")
 	//mysqlDatabase := os.Getenv("MYSQL_DATABASE")
 
-	mysqlUser := "root"
+	mysqlUser := "uttc"
 	mysqlPwd := "ramen102"
 	//mysqlHost := "34.172.193.162:3306"
 	mysqlHost := "34.27.193.191:3306"
