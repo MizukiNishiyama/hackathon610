@@ -8,11 +8,11 @@ import (
 	"net/http"
 )
 
-type SearchUserController struct {
-	SearchUserUseCase *usecase.SearchUserUseCase
+type SearchChannelController struct {
+	SearchChannelUseCase *usecase.SearchChannelUseCase
 }
 
-func (c *SearchUserController) Handle(w http.ResponseWriter, r *http.Request) {
+func (c *SearchChannelController) Handle(w http.ResponseWriter, r *http.Request) {
 	name := r.URL.Query().Get("name")
 	if name == "" {
 		log.Println("fail: name is empty")
@@ -20,19 +20,19 @@ func (c *SearchUserController) Handle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	users, err := c.SearchUserUseCase.Handle(name)
+	channels, err := c.SearchChannelUseCase.Handle(name)
 	if err != nil {
-		log.Printf("fail: SearchUserUseCase.Handle, %v\n", err)
+		log.Printf("fail: SearchChannelUseCase.Handle, %v\n", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
-	usersRes := make([]model.UserResForHTTPGet, len(users))
-	for i, u := range users {
-		usersRes[i] = model.UserResForHTTPGet{Id: u.Id, Name: u.Name, Email: u.Email}
+	channelsRes := make([]model.ChannelResForHTTPGet, len(channels))
+	for i, u := range channels {
+		channelsRes[i] = model.ChannelResForHTTPGet{Id: u.Id, Name: u.Name}
 	}
 
-	bytes, err := json.Marshal(usersRes)
+	bytes, err := json.Marshal(channelsRes)
 	if err != nil {
 		log.Printf("fail: json.Marshal, %v\n", err)
 		w.WriteHeader(http.StatusInternalServerError)

@@ -3,13 +3,13 @@ package model
 type User struct {
 	Id   string
 	Name string
-	Age  int
+	Email  string
 }
 
 type UserResForHTTPGet struct {
 	Id   string `json:"id"`
 	Name string `json:"name"`
-	Age  int    `json:"age"`
+	Email  string    `json:"email"`
 }
 
 type UserResForHTTPPost struct {
@@ -17,6 +17,10 @@ type UserResForHTTPPost struct {
 }
 
 type UserReqForHTTPPost struct {
+	Id string `json:"id"`
 	Name string `json:"name"`
-	Age  int    `json:"age"`
+	Email string `json:"email"`
 }
+
+
+

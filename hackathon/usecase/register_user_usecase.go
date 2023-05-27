@@ -15,7 +15,7 @@ func (uc *RegisterUserUseCase) Handle(user model.UserReqForHTTPPost) (model.User
 	userToInsert := model.User{
 		Id:   id,
 		Name: user.Name,
-		Age:  user.Age,
+		Email:  user.Email,
 	}
 
 	err := uc.UserDao.Insert(userToInsert)
