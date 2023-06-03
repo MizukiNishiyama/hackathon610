@@ -39,5 +39,6 @@ func (c *SearchUserController) Handle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
+
 	w.Write(bytes)
 }

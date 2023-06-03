@@ -41,6 +41,16 @@ func main() {
 	searchMessageController := &controller.SearchMessageController{SearchMessageUseCase: &usecase.SearchMessageUseCase{MessageDao: messageDao}}
 	registerMessageController := &controller.RegisterMessageController{RegisterMessageUseCase: &usecase.RegisterMessageUseCase{MessageDao: messageDao}}
 	http.HandleFunc("/message", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+		w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
 		switch r.Method {
 		case http.MethodGet:
 			searchMessageController.Handle(w, r)
@@ -56,12 +66,24 @@ func main() {
 	channelDao := &dao.ChannelDao{DB: db}
 	searchChannelController := &controller.SearchChannelController{SearchChannelUseCase: &usecase.SearchChannelUseCase{ChannelDao: channelDao}}
 	registerChannelController := &controller.RegisterChannelController{RegisterChannelUseCase: &usecase.RegisterChannelUseCase{ChannelDao: channelDao}}
+	getChannelController := &controller.GetChannelController{GetChannelUseCase: &usecase.GetChannelUseCase{ChannelDao: channelDao}}
+
 	http.HandleFunc("/channel", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
 			searchChannelController.Handle(w, r)
 		case http.MethodPost:
 			registerChannelController.Handle(w, r)
+		default:
+			log.Printf("BadRequest(status code = 400)")
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+	})
+	http.HandleFunc("/getchannels", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodGet:
+			getChannelController.Handle(w, r)
 		default:
 			log.Printf("BadRequest(status code = 400)")
 			w.WriteHeader(http.StatusBadRequest)
@@ -86,20 +108,20 @@ func main() {
 
 func initDB() *sql.DB {
 	// DB接続のための準備
-	mysqlUser := os.Getenv("MYSQL_USER")
-	mysqlPwd := os.Getenv("MYSQL_PWD")
-	mysqlHost := os.Getenv("MYSQL_HOST")
-	mysqlDatabase := os.Getenv("MYSQL_DATABASE")
+	//mysqlUser := os.Getenv("MYSQL_USER")
+	//mysqlPwd := os.Getenv("MYSQL_PWD")
+	//mysqlHost := os.Getenv("MYSQL_HOST")
+	//mysqlDatabase := os.Getenv("MYSQL_DATABASE")
 
 	//mysqlUser := "uttc"
 	//mysqlPwd := "ramen102"
 	//mysqlHost := "34.27.193.191:3306"
 	//mysqlDatabase := "hackathon"
 
-	//mysqlUser := "test_user"
-	//mysqlPwd := "password"
-	//mysqlHost := "(localhost:3306)"
-	//mysqlDatabase := "test_database"
+	mysqlUser := "test_user"
+	mysqlPwd := "password"
+	mysqlHost := "(localhost:3306)"
+	mysqlDatabase := "test_database"
 
 	connStr := fmt.Sprintf("%s:%s@%s/%s", mysqlUser, mysqlPwd, mysqlHost, mysqlDatabase)
 

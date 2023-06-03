@@ -11,7 +11,7 @@ type UserDao struct {
 }
 
 func (dao *UserDao) FindByName(name string) ([]model.User, error) {
-	rows, err := dao.DB.Query("SELECT id, name, email FROM user WHERE name = ?", name)
+	rows, err := dao.DB.Query("SELECT user_id, user_name, user_email FROM user WHERE user_name = ?", name)
 	if err != nil {
 		return nil, err
 	}

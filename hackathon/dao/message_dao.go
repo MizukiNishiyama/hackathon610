@@ -10,8 +10,8 @@ type MessageDao struct {
 	DB *sql.DB
 }
 
-func (dao *MessageDao) FindByName(content string) ([]model.Message, error) {
-	rows, err := dao.DB.Query("SELECT id, content, userid, channelid FROM message WHERE content = ?", content)
+func (dao *MessageDao) ShowMessages(channelid string) ([]model.Message, error) {
+	rows, err := dao.DB.Query("SELECT message_id, message_content, user_id, channel_id FROM message WHERE channel_id = ?", channelid)
 	if err != nil {
 		return nil, err
 	}

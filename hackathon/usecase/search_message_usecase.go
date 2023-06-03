@@ -9,6 +9,6 @@ type SearchMessageUseCase struct {
 	MessageDao *dao.MessageDao
 }
 
-func (uc *SearchMessageUseCase) Handle(content string) ([]model.Message, error) {
-	return uc.MessageDao.FindByName(content)
+func (uc *SearchMessageUseCase) Handle(channelid string) ([]model.Message, error) {
+	return uc.MessageDao.ShowMessages(channelid)
 }

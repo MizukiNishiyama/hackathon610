@@ -13,14 +13,14 @@ type SearchMessageController struct {
 }
 
 func (c *SearchMessageController) Handle(w http.ResponseWriter, r *http.Request) {
-	content := r.URL.Query().Get("content")
-	if content == "" {
-		log.Println("fail: name is empty")
+	channelid := r.URL.Query().Get("channelid")
+	if channelid == "" {
+		log.Println("fail: channelid is empty")
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	messages, err := c.SearchMessageUseCase.Handle(content)
+	messages, err := c.SearchMessageUseCase.Handle(channelid)
 	if err != nil {
 		log.Printf("fail: SearchMessageUseCase.Handle, %v\n", err)
 		w.WriteHeader(http.StatusInternalServerError)
@@ -39,5 +39,8 @@ func (c *SearchMessageController) Handle(w http.ResponseWriter, r *http.Request)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 	w.Write(bytes)
 }

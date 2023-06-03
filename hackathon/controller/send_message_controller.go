@@ -14,6 +14,10 @@ type RegisterMessageController struct {
 }
 
 func (c *RegisterMessageController) Handle(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		log.Printf("fail: io.ReadAll, %v\n", err)
@@ -41,6 +45,10 @@ func (c *RegisterMessageController) Handle(w http.ResponseWriter, r *http.Reques
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	w.Header().Set("Content-Type", "application/json")
+
+	if r.Method == "OPTIONS" {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
 	w.Write(bytes)
 }

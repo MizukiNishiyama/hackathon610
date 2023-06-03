@@ -11,7 +11,25 @@ type ChannelDao struct {
 }
 
 func (dao *ChannelDao) FindByName(name string) ([]model.Channel, error) {
-	rows, err := dao.DB.Query("SELECT id, name FROM channel WHERE name = ?", name)
+	rows, err := dao.DB.Query("SELECT channel_id, channel_name FROM channel WHERE channel_name = ?", name)
+	if err != nil {
+		return nil, err
+	}
+
+	channels := make([]model.Channel, 0)
+	for rows.Next() {
+		var u model.Channel
+		if err := rows.Scan(&u.Id, &u.Name); err != nil {
+			return nil, err
+		}
+		channels = append(channels, u)
+	}
+
+	return channels, nil
+}
+
+func (dao *ChannelDao) GetChannels() ([]model.Channel, error) {
+	rows, err := dao.DB.Query("SELECT channel_id, channel_name FROM channel")
 	if err != nil {
 		return nil, err
 	}

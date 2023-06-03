@@ -42,5 +42,6 @@ func (c *RegisterChannelController) Handle(w http.ResponseWriter, r *http.Reques
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
+
 	w.Write(bytes)
 }

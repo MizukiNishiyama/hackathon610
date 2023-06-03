@@ -8,19 +8,13 @@ import (
 	"net/http"
 )
 
-type SearchChannelController struct {
-	SearchChannelUseCase *usecase.SearchChannelUseCase
+type GetChannelController struct {
+	GetChannelUseCase *usecase.GetChannelUseCase
 }
 
-func (c *SearchChannelController) Handle(w http.ResponseWriter, r *http.Request) {
-	name := r.URL.Query().Get("name")
-	if name == "" {
-		log.Println("fail: name is empty")
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
+func (c *GetChannelController) Handle(w http.ResponseWriter, r *http.Request) {
 
-	channels, err := c.SearchChannelUseCase.Handle(name)
+	channels, err := c.GetChannelUseCase.Handle()
 	if err != nil {
 		log.Printf("fail: SearchChannelUseCase.Handle, %v\n", err)
 		w.WriteHeader(http.StatusInternalServerError)
@@ -39,6 +33,8 @@ func (c *SearchChannelController) Handle(w http.ResponseWriter, r *http.Request)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 	w.Write(bytes)
 }
