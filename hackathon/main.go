@@ -25,6 +25,16 @@ func main() {
 	searchUserController := &controller.SearchUserController{SearchUserUseCase: &usecase.SearchUserUseCase{UserDao: userDao}}
 	registerUserController := &controller.RegisterUserController{RegisterUserUseCase: &usecase.RegisterUserUseCase{UserDao: userDao}}
 	http.HandleFunc("/user", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+		w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
 		switch r.Method {
 		case http.MethodGet:
 			searchUserController.Handle(w, r)
@@ -32,6 +42,7 @@ func main() {
 			registerUserController.Handle(w, r)
 		default:
 			log.Printf("BadRequest(status code = 400)")
+			fmt.Printf(r.Method)
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
@@ -108,20 +119,20 @@ func main() {
 
 func initDB() *sql.DB {
 	// DB接続のための準備
-	//mysqlUser := os.Getenv("MYSQL_USER")
-	//mysqlPwd := os.Getenv("MYSQL_PWD")
-	//mysqlHost := os.Getenv("MYSQL_HOST")
-	//mysqlDatabase := os.Getenv("MYSQL_DATABASE")
+	mysqlUser := os.Getenv("MYSQL_USER")
+	mysqlPwd := os.Getenv("MYSQL_PWD")
+	mysqlHost := os.Getenv("MYSQL_HOST")
+	mysqlDatabase := os.Getenv("MYSQL_DATABASE")
 
 	//mysqlUser := "uttc"
 	//mysqlPwd := "ramen102"
 	//mysqlHost := "34.27.193.191:3306"
 	//mysqlDatabase := "hackathon"
 
-	mysqlUser := "test_user"
-	mysqlPwd := "password"
-	mysqlHost := "(localhost:3306)"
-	mysqlDatabase := "test_database"
+	//mysqlUser := "test_user"
+	//mysqlPwd := "password"
+	//mysqlHost := "(localhost:3306)"
+	//mysqlDatabase := "test_database"
 
 	connStr := fmt.Sprintf("%s:%s@%s/%s", mysqlUser, mysqlPwd, mysqlHost, mysqlDatabase)
 

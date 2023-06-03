@@ -4,7 +4,7 @@ body {
 }
 
 .showmessages {
-  width: 50%;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -20,6 +20,7 @@ body {
   border-bottom: 1px solid #ddd;
 }
 
+
 .channels div.active {
   background-color: #f0f0f0;
 }
@@ -27,7 +28,7 @@ body {
 .messages {
   border: 1px solid #ddd;
   padding: 1rem;
-  height: 300px;
+  height: 350px;
   overflow-y: scroll;
 }
 
@@ -42,9 +43,14 @@ body {
 }
 
 .sendmessages input[type="text"] {
-  margin-bottom: 1rem;
-  padding: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
   border: 1px solid #ddd;
+  width:300px;
+}
+
+.sendmessages h1 {
+  font-size: 30px;
 }
 
 .sendmessages button {
@@ -57,6 +63,34 @@ body {
 }
 
 .sendmessages button:hover {
-  background-color: #0056b3;
+  background-color: #2b5179;
 }
 
+.showmessages .messages div {
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #ffffff;
+  border-radius: 5px;
+  display: block;
+}
+
+.loginform {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.loginform button {
+  background-color: #4285f4;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.loginform button:hover {
+  background-color: #2b6ed2;
+}

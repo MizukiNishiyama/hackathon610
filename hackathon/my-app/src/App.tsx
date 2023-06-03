@@ -1,7 +1,73 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-// import { onAuthStateChanged } from "firebase/auth";
-// import { fireAuth } from "./firebase";
+
+//authentification
+import { onAuthStateChanged } from "firebase/auth";
+import { fireAuth } from "./firebase";
+import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+
+// //routing
+import { BrowserRouter, Route} from 'react-router-dom';
+
+export const LoginForm: React.FC = () => {
+    /**
+     * googleでログインする
+     */
+    const signInWithGoogle = (): void => {
+      // Google認証プロバイダを利用する
+      const provider = new GoogleAuthProvider();
+  
+      // ログイン用のポップアップを表示
+      signInWithPopup(fireAuth, provider)
+        .then(res => {
+            const user =res.user;
+            alert("ログインユーザー: " + user.displayName);
+            fetch("http://localhost:8000/user", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: user.displayName,
+                    email: user.email
+                })
+            })    
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+        })
+        .catch(err => {
+            const errorMessage =err.message;
+            alert(errorMessage);
+        })
+    };
+  
+    /**
+     * ログアウトする
+     */
+    const signOutWithGoogle = (): void => {
+        signOut(fireAuth).then(() => {
+          alert("ログアウトしました");
+        }).catch(err => {
+          alert(err);
+        });
+      };
+    
+  
+    return (
+      <div className = "loginform" >
+        <button onClick={signInWithGoogle}>
+          Googleでログイン
+        </button>
+        <button onClick={signOutWithGoogle}>
+        ログアウト
+        </button>
+      </div>
+    );
+  };
+
 
 type Channel = {
     id: string;
@@ -16,7 +82,6 @@ type Message = {
 };
 
 type User = {
-    id: string;
     name: string;
     email: string;
 }
@@ -51,28 +116,28 @@ function ShowChannelMessage(props:Props) {
             const response = await fetch(`http://localhost:8000/message?channelid=${activeChannel}`);
             const data = await response.json();
             setMessages(data);
-            // const response = await fetch(`http://localhost:8000/message?channelid=${activeChannel}`);
-            // const data = await response.json();
-            // setMessages(data);
+            
         };
 
         fetchMessages();
     }, [activeChannel]);
+    
 
     return (
         <div className="showmessages">
             <div className="channels">
+                <h1>Channel</h1>
                 {channels.map(channel => (
                     <div
                         key={channel.id}
-                        onClick={() => setActiveChannel(channel.id)}
+                        onClick={() =>  setActiveChannel(channel.id)}
                         className={activeChannel === channel.id ? 'active' : ''}
                     >
                         {channel.name}
                     </div>
                 ))}
             </div>
-
+            <h1>Talk</h1>        
             <div className="messages">
                 {messages.map(message => (
                     <div key={message.messageid}>{message.content}</div>
@@ -82,8 +147,12 @@ function ShowChannelMessage(props:Props) {
     );
 }
 
+// function getUserinfo () {
+    
+
+// }
+
 function Sendmessage(props:Props) {
-    // useEffect(() => {
     const {activeChannel, setActiveChannel} = props
     const [content, setContent] = useState("")
     const [userid ,setUserid] = useState("")
@@ -95,8 +164,13 @@ function Sendmessage(props:Props) {
             alert("メッセージを入力してください。");
             return;
         }
-        
+
         try {
+            const user = fireAuth.currentUser
+            if (!user) {
+                alert("ユーザーがログインしていません。");
+                return;
+            }
             const response = await fetch("http://localhost:8000/message", {
                 method: "POST",
                 headers: {
@@ -105,7 +179,7 @@ function Sendmessage(props:Props) {
                 body: JSON.stringify({
                     content: content,
                     channelid: activeChannel,
-                    userid: userid,
+                    userid: user.displayName,
                 }),
                 
             });
@@ -117,34 +191,50 @@ function Sendmessage(props:Props) {
         }
     
     };
-    
-    // });    
-
+ 
     return(
         <div className="sendmessages">
                 <form onSubmit={sendMessages}>
-                    <label>
-                        MESSAGE:
+                    <h1>
+                        MESSAGE 
                         <input type="text" value={content} onChange={(e) => setContent(e.target.value)} />
-                    </label>  
-                    <label>
-                        USERNAME:
-                        <input type="text" value={userid} onChange={(e) => setUserid(e.target.value)} />
-                    </label>  
+                    </h1>  
                     <button type ="submit">SEND</button>
                 </form>
             </div>
     )
 }
 
+function LoginState() {
+    const [loginUser, setLoginUser] = useState(fireAuth.currentUser);
+  
+  // ログイン状態を監視して、stateをリアルタイムで更新する
+    onAuthStateChanged(fireAuth, user => {
+        setLoginUser(user);
+    });
+    return(
+        <div>
+            <LoginForm />
+            {loginUser ? <App /> : null}
+        </div>
+        
+    );
+}
+
+
 function App() {
     const [activeChannel, setActiveChannel] = useState<string>("");
+
     return (
-        <div>
-            <ShowChannelMessage activeChannel={activeChannel} setActiveChannel={setActiveChannel}/>
-            <Sendmessage activeChannel={activeChannel} setActiveChannel={setActiveChannel} />
-        </div>
-    )
+        // <BrowserRouter>
+                <div>
+                    <LoginForm /> 
+                    <ShowChannelMessage activeChannel={activeChannel} setActiveChannel={setActiveChannel}/>
+                    <Sendmessage activeChannel={activeChannel} setActiveChannel={setActiveChannel} />     
+                                
+                </div>
+        // </BrowserRouter>
+    );
 }
 
 export default App;
