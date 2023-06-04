@@ -29,7 +29,7 @@ func (c *SearchMessageController) Handle(w http.ResponseWriter, r *http.Request)
 
 	messagesRes := make([]model.MessageResForHTTPGet, len(messages))
 	for i, u := range messages {
-		messagesRes[i] = model.MessageResForHTTPGet{Id: u.Id, Content: u.Content, UserId: u.UserId, ChannelId: u.ChannelId}
+		messagesRes[i] = model.MessageResForHTTPGet{Id: u.Id, Content: u.Content, UserId: u.UserId, ChannelId: u.ChannelId, Time: u.Time}
 	}
 
 	bytes, err := json.Marshal(messagesRes)

@@ -4,20 +4,52 @@ body {
 }
 
 .showmessages {
+  display: flex;
+  justify-content: space-between; /* ここでは、itemsが均等に間隔を空けて配置されます */
   width: 80%;
   margin: 0 auto;
 }
 
+/* チャンネル一覧とメッセージ一覧の幅を調整 */
 .channels {
+  flex: 1;  /* flex-grow を使って残りのスペースを均等に分割 */
+  margin-right: 1rem; /* メッセージ一覧との間に余白を設ける */
+}
+
+
+.messages {
+  flex: 2;  /* flex-grow を使って残りのスペースを均等に分割 */
+  border: 1px solid #ddd;
+  padding: 1rem;
+  height: 500px;
+  overflow-y: scroll;
+  margin-left:25px;
+}
+
+.messages h1{
+  font-size: 25px;
+  text-align: center;
+  background-color: #007bff;
+  color:white;
+  border-radius: 4px;
+}
+
+/* .showmessages {
+  width: 80%;
+  margin: 0 auto;
+} */
+
+/* .channels {
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
-}
+} */
 
 .channels div {
   cursor: pointer;
   padding: 1rem;
   border-bottom: 1px solid #ddd;
+  margin:25px;
 }
 
 
@@ -25,16 +57,20 @@ body {
   background-color: #f0f0f0;
 }
 
-.messages {
+/* .messages {
   border: 1px solid #ddd;
   padding: 1rem;
-  height: 350px;
+  height: 250px;
   overflow-y: scroll;
-}
+} */
 
 .sendmessages {
   width: 50%;
   margin: 2rem auto;
+}
+
+.showmessages h2 {
+  font-size: 25px;
 }
 
 .sendmessages form {
@@ -47,10 +83,11 @@ body {
   padding: 1rem;
   border: 1px solid #ddd;
   width:300px;
+
 }
 
 .sendmessages h1 {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .sendmessages button {
@@ -67,12 +104,26 @@ body {
 }
 
 .showmessages .messages div {
-  padding: 10px;
-  margin: 10px 0;
-  background-color: #ffffff;
-  border-radius: 5px;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
+
+.showmessages .messages .user-name {
+  font-size: 9px;
+  margin-bottom: 5px;
+}
+
+.showmessages .messages .message-content {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.showmessages .messages .message-time {
+  font-size: 9px;
+  color: gray;
+}
+
 
 .loginform {
   display: flex;

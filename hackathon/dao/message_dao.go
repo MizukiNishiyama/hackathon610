@@ -11,7 +11,7 @@ type MessageDao struct {
 }
 
 func (dao *MessageDao) ShowMessages(channelid string) ([]model.Message, error) {
-	rows, err := dao.DB.Query("SELECT message_id, message_content, user_id, channel_id FROM message WHERE channel_id = ?", channelid)
+	rows, err := dao.DB.Query("SELECT message_id, message_content, user_id, channel_id, time FROM message WHERE channel_id = ?", channelid)
 	if err != nil {
 		return nil, err
 	}
@@ -19,7 +19,7 @@ func (dao *MessageDao) ShowMessages(channelid string) ([]model.Message, error) {
 	messages := make([]model.Message, 0)
 	for rows.Next() {
 		var u model.Message
-		if err := rows.Scan(&u.Id, &u.Content, &u.UserId, &u.ChannelId); err != nil {
+		if err := rows.Scan(&u.Id, &u.Content, &u.UserId, &u.ChannelId, &u.Time); err != nil {
 			return nil, err
 		}
 		messages = append(messages, u)
@@ -29,6 +29,11 @@ func (dao *MessageDao) ShowMessages(channelid string) ([]model.Message, error) {
 }
 
 func (dao *MessageDao) Insert(message model.Message) error {
-	_, err := dao.DB.Exec("INSERT into message VALUES(?, ?, ?, ?)", message.Id, message.Content, message.UserId, message.ChannelId)
+	_, err := dao.DB.Exec("INSERT into message VALUES(?, ?, ?, ?, ?)", message.Id, message.Content, message.UserId, message.ChannelId, message.Time)
+	return err
+}
+
+func (dao *MessageDao) DeleteMessage(id string) error {
+	_, err := dao.DB.Exec("DELETE from message WHERE id =?, id")
 	return err
 }

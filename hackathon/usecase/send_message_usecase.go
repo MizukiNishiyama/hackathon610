@@ -17,6 +17,7 @@ func (uc *RegisterMessageUseCase) Handle(message model.MessageReqForHTTPPost) (m
 		Content:   message.Content,
 		UserId:    message.UserId,
 		ChannelId: message.ChannelId,
+		Time:      message.Time,
 	}
 
 	err := uc.MessageDao.Insert(messageToInsert)

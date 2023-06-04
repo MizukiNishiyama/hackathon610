@@ -79,6 +79,7 @@ type Message = {
     content: string;
     userid: string;
     channelid: string;
+    time: string;
 };
 
 type User = {
@@ -89,14 +90,15 @@ type User = {
 type Props = {
     activeChannel: string;
     setActiveChannel: React.Dispatch<React.SetStateAction<string>>;
+    refreshMessages: boolean;
+    setRefreshMessages: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ShowChannelMessage(props:Props) {
-    const {activeChannel, setActiveChannel} = props
+    const {activeChannel, setActiveChannel, refreshMessages} = props
 
     const [channels, setChannels] = useState<Channel[]>([]);
     const [messages, setMessages] = useState<Message[]>([]);
-
 
     useEffect(() => {
         const fetchChannels = async () => {
@@ -120,13 +122,14 @@ function ShowChannelMessage(props:Props) {
         };
 
         fetchMessages();
-    }, [activeChannel]);
+    }, [activeChannel, refreshMessages]);
     
 
     return (
         <div className="showmessages">
+            
             <div className="channels">
-                <h1>Channel</h1>
+            <h1>channel</h1>
                 {channels.map(channel => (
                     <div
                         key={channel.id}
@@ -137,10 +140,18 @@ function ShowChannelMessage(props:Props) {
                     </div>
                 ))}
             </div>
-            <h1>Talk</h1>        
+                
             <div className="messages">
+            <h1>talk</h1>    
                 {messages.map(message => (
-                    <div key={message.messageid}>{message.content}</div>
+                    <div key={message.messageid}>
+                        <span className="user-name">{message.userid}</span>
+                        <div className ="content-time">
+                            <span className="message-content">{message.content}</span>
+                            <span className="message-time">{message.time}</span>
+                        </div>
+                    </div>
+                    
                 ))}
             </div>
         </div>
@@ -153,13 +164,17 @@ function ShowChannelMessage(props:Props) {
 // }
 
 function Sendmessage(props:Props) {
-    const {activeChannel, setActiveChannel} = props
+    const {activeChannel, refreshMessages, setRefreshMessages} = props
     const [content, setContent] = useState("")
     const [userid ,setUserid] = useState("")
     
+    
+    
     const sendMessages = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+        console.log(content);
+        setContent("")
+
         if (!content) {
             alert("メッセージを入力してください。");
             return;
@@ -180,12 +195,14 @@ function Sendmessage(props:Props) {
                     content: content,
                     channelid: activeChannel,
                     userid: user.displayName,
+                    time: ` (${new Date().getMonth()+1}/${new Date().getDate()} ${new Date().getHours()}:${new Date().getMinutes()})`,
                 }),
                 
             });
 
             const data = await response.json();
             console.log("success", data);
+            setRefreshMessages(!refreshMessages)
         } catch (error) {
             console.error("error:", error);
         }
@@ -205,32 +222,32 @@ function Sendmessage(props:Props) {
     )
 }
 
-function LoginState() {
-    const [loginUser, setLoginUser] = useState(fireAuth.currentUser);
+// function LoginState() {
+//     const [loginUser, setLoginUser] = useState(fireAuth.currentUser);
   
-  // ログイン状態を監視して、stateをリアルタイムで更新する
-    onAuthStateChanged(fireAuth, user => {
-        setLoginUser(user);
-    });
-    return(
-        <div>
-            <LoginForm />
-            {loginUser ? <App /> : null}
-        </div>
+//   // ログイン状態を監視して、stateをリアルタイムで更新する
+//     onAuthStateChanged(fireAuth, user => {
+//         setLoginUser(user);
+//     });
+//     return(
+//         <div>
+//             <LoginForm />
+//             {loginUser ? <App /> : null}
+//         </div>
         
-    );
-}
+//     );
+// }
 
 
 function App() {
     const [activeChannel, setActiveChannel] = useState<string>("");
-
+    const [refreshMessages, setRefreshMessages] = useState<boolean>(false);
     return (
         // <BrowserRouter>
-                <div>
+                <div className="App">
                     <LoginForm /> 
-                    <ShowChannelMessage activeChannel={activeChannel} setActiveChannel={setActiveChannel}/>
-                    <Sendmessage activeChannel={activeChannel} setActiveChannel={setActiveChannel} />     
+                    <ShowChannelMessage activeChannel={activeChannel} setActiveChannel={setActiveChannel} setRefreshMessages={setRefreshMessages} refreshMessages={refreshMessages}/>
+                    <Sendmessage activeChannel={activeChannel} setActiveChannel={setActiveChannel} setRefreshMessages={setRefreshMessages} refreshMessages={refreshMessages}/>     
                                 
                 </div>
         // </BrowserRouter>
