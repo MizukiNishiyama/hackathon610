@@ -87,7 +87,7 @@ func main() {
 			return
 		}
 		switch r.Method {
-		case http.MethodPost:
+		case http.MethodDelete:
 			deleteMessageController.Handle(w, r)
 		default:
 			log.Printf("BadRequest(status code = 400)")
