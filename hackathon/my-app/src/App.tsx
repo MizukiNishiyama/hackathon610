@@ -22,7 +22,7 @@ export const LoginForm: React.FC = () => {
         .then(res => {
             const user =res.user;
             alert("ログインユーザー: " + user.displayName);
-            fetch("http://localhost:8000/user", {
+            fetch("https://uttc-bapgglyr6q-uc.a.run.app/user", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -102,7 +102,7 @@ function ShowChannelMessage(props:Props) {
 
     useEffect(() => {
         const fetchChannels = async () => {
-            const response = await fetch('http://localhost:8000/getchannels');
+            const response = await fetch('https://uttc-bapgglyr6q-uc.a.run.app/getchannels');
             const data = await response.json();
             setChannels(data);
         };
@@ -115,7 +115,7 @@ function ShowChannelMessage(props:Props) {
                 setMessages([]);
                 return;
             }
-            const response = await fetch(`http://localhost:8000/message?channelid=${activeChannel}`);
+            const response = await fetch(`https://uttc-bapgglyr6q-uc.a.run.app/message?channelid=${activeChannel}`);
             const data = await response.json();
             setMessages(data);
             
@@ -186,7 +186,7 @@ function Sendmessage(props:Props) {
                 alert("ユーザーがログインしていません。");
                 return;
             }
-            const response = await fetch("http://localhost:8000/message", {
+            const response = await fetch("https://uttc-bapgglyr6q-uc.a.run.app/message", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
