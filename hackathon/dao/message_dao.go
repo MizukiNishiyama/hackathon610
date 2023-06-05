@@ -34,6 +34,6 @@ func (dao *MessageDao) Insert(message model.Message) error {
 }
 
 func (dao *MessageDao) DeleteMessage(id string) error {
-	_, err := dao.DB.Exec("DELETE from message WHERE message_id =?, id")
+	_, err := dao.DB.Exec("DELETE from message WHERE message_id =?", id)
 	return err
 }
