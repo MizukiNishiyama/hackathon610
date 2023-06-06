@@ -10,9 +10,7 @@ import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 // import { BrowserRouter, Route} from 'react-router-dom';
 
 export const LoginForm: React.FC = () => {
-    /**
-     * googleでログインする
-     */
+    
     const signInWithGoogle = (): void => {
       // Google認証プロバイダを利用する
       const provider = new GoogleAuthProvider();
