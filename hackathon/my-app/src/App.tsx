@@ -7,7 +7,7 @@ import { fireAuth } from "./firebase";
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 
 // //routing
-import { BrowserRouter, Route} from 'react-router-dom';
+// import { BrowserRouter, Route} from 'react-router-dom';
 
 export const LoginForm: React.FC = () => {
     /**
