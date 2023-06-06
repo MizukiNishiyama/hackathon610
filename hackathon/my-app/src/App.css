@@ -124,6 +124,20 @@ body {
   color: gray;
 }
 
+.showmessages button {
+  padding: 0.5rem;
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width:50px;
+  margin:5px;
+}
+
+.showmessages button:hover {
+  background-color: #ad0808;
+}
 
 .loginform {
   display: flex;

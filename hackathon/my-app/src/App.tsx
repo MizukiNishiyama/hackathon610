@@ -76,7 +76,7 @@ type Channel = {
 };
 
 type Message = {
-    messageid: string;
+    id: string;
     content: string;
     userid: string;
     channelid: string;
@@ -96,11 +96,13 @@ type Props = {
 }
 
 function ShowChannelMessage(props:Props) {
-    const {activeChannel, setActiveChannel, refreshMessages} = props
+    const {activeChannel, setActiveChannel, refreshMessages, setRefreshMessages} = props
 
     const [channels, setChannels] = useState<Channel[]>([]);
     const [messages, setMessages] = useState<Message[]>([]);
 
+    
+    
     useEffect(() => {
         const fetchChannels = async () => {
             // const response = await fetch("http://localhost:3000/getchannels");
@@ -130,6 +132,24 @@ function ShowChannelMessage(props:Props) {
     }, [activeChannel, refreshMessages]);
     
 
+    async function deleteMessage(messageId: string) {
+        console.log("削除するメッセージ", messageId)
+        try {
+            const response = await fetch(`https://uttc-bapgglyr6q-uc.a.run.app/delete_message?id=${messageId}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            // メッセージのリフレッシュを行うためのState更新（RefreshMessagesを切り替え）
+            setRefreshMessages(!refreshMessages);
+        } catch (error) {
+            console.error("An error occurred while deleting the message:", error);
+        }
+    }
+    
+    
+    
     return (
         <div className="showmessages">
             
@@ -149,11 +169,12 @@ function ShowChannelMessage(props:Props) {
             <div className="messages">
             <h1>talk</h1>    
                 {messages.map(message => (
-                    <div key={message.messageid}>
+                    <div key={message.time}>
                         <span className="user-name">{message.userid}</span>
                         <div className ="content-time">
                             <span className="message-content">{message.content}</span>
                             <span className="message-time">{message.time}</span>
+                            <button onClick={() => deleteMessage(message.id)}>Delete</button>
                         </div>
                     </div>
                     
@@ -163,15 +184,11 @@ function ShowChannelMessage(props:Props) {
     );
 }
 
-// function getUserinfo () {
-    
 
-// }
 
 function Sendmessage(props:Props) {
     const {activeChannel, refreshMessages, setRefreshMessages} = props
     const [content, setContent] = useState("")
-    const [userid ,setUserid] = useState("")
     
     
     
