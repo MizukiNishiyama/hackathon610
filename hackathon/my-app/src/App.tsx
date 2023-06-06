@@ -15,7 +15,7 @@ export const LoginForm: React.FC = () => {
       // Google認証プロバイダを利用する
       const provider = new GoogleAuthProvider();
   
-      // ログイン用のポップアップを表示
+      
       signInWithPopup(fireAuth, provider)
         .then(res => {
             const user =res.user;
