@@ -27,3 +27,7 @@ type MessageReqForHTTPPost struct {
 	ChannelId string `json:"channelid"`
 	Time      string `json:"time"`
 }
+type EditMessage struct {
+	Id      string `json:"id"`
+	Content string `json:"content"`
+}

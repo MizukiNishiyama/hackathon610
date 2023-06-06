@@ -37,3 +37,8 @@ func (dao *MessageDao) DeleteMessage(id string) error {
 	_, err := dao.DB.Exec("DELETE from message WHERE message_id =?", id)
 	return err
 }
+
+func (dao *MessageDao) EditMessage(id, content string) error {
+	_, err := dao.DB.Exec("UPDATE messages SET content = ? WHERE id = ?", content, id)
+	return err
+}

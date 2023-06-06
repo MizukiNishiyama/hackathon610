@@ -96,6 +96,28 @@ func main() {
 		}
 	})
 
+	EditMessageController := &controller.DeleteMessageController{DeleteMessageUseCase: &usecase.DeleteMessageUseCase{MessageDao: messageDao}}
+	http.HandleFunc("/edit", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+		w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+		switch r.Method {
+		case http.MethodPost:
+			EditMessageController.Handle(w, r)
+		default:
+			log.Printf("BadRequest(status code = 400)")
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+	})
+
 	channelDao := &dao.ChannelDao{DB: db}
 	searchChannelController := &controller.SearchChannelController{SearchChannelUseCase: &usecase.SearchChannelUseCase{ChannelDao: channelDao}}
 	registerChannelController := &controller.RegisterChannelController{RegisterChannelUseCase: &usecase.RegisterChannelUseCase{ChannelDao: channelDao}}
