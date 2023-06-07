@@ -13,6 +13,12 @@ import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
+import AppBar from '@mui/material/AppBar';
+
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+
+import MenuIcon from '@mui/icons-material/Menu';
 
 export const LoginForm: React.FC = () => {
     
@@ -60,14 +66,25 @@ export const LoginForm: React.FC = () => {
     
   
     return (
-      <div className = "loginform" >
-        <button onClick={signInWithGoogle}>
-          Googleでログイン
-        </button>
-        <button onClick={signOutWithGoogle}>
-        ログアウト
-        </button>
-      </div>
+    //   <div className = "loginform" >
+    //     <button onClick={signInWithGoogle}>
+    //       Googleでログイン
+    //     </button>
+    //     <button onClick={signOutWithGoogle}>
+    //     ログアウト
+    //     </button>
+    //   </div>
+      <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Message Application
+          </Typography>
+          <Button color="inherit" onClick={signInWithGoogle}>Login</Button>
+          <Button color="inherit" onClick={signOutWithGoogle}>Login</Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
     );
   };
 
@@ -165,6 +182,10 @@ function ShowChannelMessage(props:Props) {
         const fetchMessages = async () => {
             if (activeChannel === "") {
                 setMessages([]);
+                return;
+            }
+            if (!activeChannel) {
+                alert("チャンネルを選択してください。");
                 return;
             }
             // const response = await fetch("http://localhost:3000/message?channelid=${activeChannel}");
