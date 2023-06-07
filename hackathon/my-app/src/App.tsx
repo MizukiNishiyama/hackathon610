@@ -126,10 +126,10 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
                             value={editContent}
                             onChange={event => setEditContent(event.target.value)}
                         />
-                        <Button type="submit" variant="outlined" startIcon={<SendIcon/>}>Send</Button>
+                        <Button type="submit" variant="outlined"  style={{ backgroundColor: 'blue', color: 'white', borderRadius: '20px', fontSize:"10px" }}>Send</Button>
                     </form>
                 ) : (
-                    <Button onClick={() => setIsEditing(true)} variant="outlined" startIcon={<SendIcon/>}>Edit</Button>
+                    <Button onClick={() => setIsEditing(true)} variant="outlined" style={{ backgroundColor: 'green', color: 'white', borderRadius: '20px', fontSize:"10px"  }}>Edit</Button>
                 )}
             </div>
         </div>
