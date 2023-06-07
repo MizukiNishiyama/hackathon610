@@ -179,25 +179,31 @@ function ShowChannelMessage(props:Props) {
             </div>
                 
             <div className="messages">
-            <h1>talk</h1>    
-                {messages.map(message => (
-                    <div key={message.time}>
-                        <span className="user-name">{message.userid}</span>
-                        <div className ="content-time">
-                            <span className="message-content">{message.content}</span>
-                            <span className="message-time">{message.time}</span>
-                            <button onClick={() => deleteMessage(message.id)}>Delete</button>
-                            <form onSubmit={(event) => {
-                                event.preventDefault();
-                                EditMessage(message.id, message.content)
-                            }}>
-                                <input type="text" value={message.content} />
-                                <button type ="submit">SEND</button>
-                            </form>
+                <h1>talk</h1>    
+                {messages.map(message => {
+                    const [editContent, setEditContent] = useState(message.content);
+                    return (
+                        <div key={message.time}>
+                            <span className="user-name">{message.userid}</span>
+                            <div className ="content-time">
+                                <span className="message-content">{message.content}</span>
+                                <span className="message-time">{message.time}</span>
+                                <button onClick={() => deleteMessage(message.id)}>Delete</button>
+                                <form onSubmit={(event) => {
+                                    event.preventDefault();
+                                    EditMessage(message.id, editContent);
+                                }}>
+                                    <input 
+                                        type="text" 
+                                        value={editContent}
+                                        onChange={event => setEditContent(event.target.value)}
+                                    />
+                                    <button type ="submit">SEND</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                    
-                ))}
+                    );
+                })}
             </div>
         </div>
     );
