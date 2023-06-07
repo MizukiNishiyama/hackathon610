@@ -1,10 +1,8 @@
 package controller
 
 import (
-	"encoding/json"
-	"fmt"
-	"hackathon/model"
 	"hackathon/usecase"
+	"log"
 	"net/http"
 )
 
@@ -45,23 +43,21 @@ import (
 //}
 
 type EditMessageController struct {
-	EditMessageUsecase *usecase.EditMessageUsecase
+	EditMessageUseCase *usecase.EditMessageUseCase
 }
 
 func (c *EditMessageController) Handle(w http.ResponseWriter, r *http.Request) {
-	var m model.EditMessage
-	err := json.NewDecoder(r.Body).Decode(&m)
+	id := r.URL.Query().Get("id")
+	content := r.URL.Query().Get("content")
+	if id == "" {
+		http.Error(w, "missing message id", http.StatusBadRequest)
+	}
+	err := c.EditMessageUseCase.EditMessage(id, content)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		log.Printf("fail: EditMessageUseCase.Handle, %v\n", err)
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
-	err = c.EditMessageUsecase.EditMessage(m.Id, m.Content)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	fmt.Fprintf(w, m.Id, m.Content)
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "Message successfully updated")
 }

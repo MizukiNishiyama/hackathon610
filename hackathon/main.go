@@ -96,7 +96,7 @@ func main() {
 		}
 	})
 
-	EditMessageController := &controller.EditMessageController{EditMessageUsecase: &usecase.EditMessageUsecase{MessageDao: messageDao}}
+	EditMessageController := &controller.EditMessageController{EditMessageUseCase: &usecase.EditMessageUseCase{MessageDao: messageDao}}
 	http.HandleFunc("/edit", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Access-Control-Allow-Credentials", "true")
