@@ -114,10 +114,10 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
                 <span className="message-content">{message.content}</span>
                 <span className="message-time">{message.time}</span>
                 <Box display="flex" justifyContent="space-between" width="200px">
-                <Box>
+                
                 <IconButton aria-label="delete" onClick={() => deleteMessage(message.id)}><DeleteIcon /></IconButton>
-                </Box>    
-                <Box>
+                   
+                
                 {isEditing ? (
                     <form onSubmit={(event) => {
                         event.preventDefault();
@@ -135,7 +135,7 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
                     <Button onClick={() => setIsEditing(true)} variant="outlined" style={{ backgroundColor: 'green', color: 'white', borderRadius: '20px', fontSize:"10px"  }}>Edit</Button>
                 )}
                 </Box> 
-                </Box>
+                
             </div>
         </div>
     );
