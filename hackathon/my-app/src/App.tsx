@@ -99,6 +99,7 @@ type EditableMessageProps = {
 };
 
 const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessage, editMessage }) => {
+    const [isEditing, setIsEditing] = useState(false);
     const [editContent, setEditContent] = useState(message.content);
 
     return (
@@ -108,21 +109,27 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
                 <span className="message-content">{message.content}</span>
                 <span className="message-time">{message.time}</span>
                 <button onClick={() => deleteMessage(message.id)}>Delete</button>
-                <form onSubmit={(event) => {
-                    event.preventDefault();
-                    editMessage(message.id, editContent);
-                }}>
-                    <input 
-                        type="text" 
-                        value={editContent}
-                        onChange={event => setEditContent(event.target.value)}
-                    />
-                    <button type="submit">SEND</button>
-                </form>
+                {isEditing ? (
+                    <form onSubmit={(event) => {
+                        event.preventDefault();
+                        editMessage(message.id, editContent);
+                        setIsEditing(false);  // Edit is done, so stop editing
+                    }}>
+                        <input 
+                            type="text" 
+                            value={editContent}
+                            onChange={event => setEditContent(event.target.value)}
+                        />
+                        <button type="submit">SEND</button>
+                    </form>
+                ) : (
+                    <button onClick={() => setIsEditing(true)}>Edit</button>
+                )}
             </div>
         </div>
     );
 };
+
 
 function ShowChannelMessage(props:Props) {
     const {activeChannel, setActiveChannel, refreshMessages, setRefreshMessages} = props
