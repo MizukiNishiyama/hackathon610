@@ -6,11 +6,11 @@ import { onAuthStateChanged } from "firebase/auth";
 import { fireAuth } from "./firebase";
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 
-// //routing
-// import { BrowserRouter, Route} from 'react-router-dom';
+//material UI
 
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const LoginForm: React.FC = () => {
     
@@ -111,22 +111,25 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
             <div className="content-time">
                 <span className="message-content">{message.content}</span>
                 <span className="message-time">{message.time}</span>
-                <button onClick={() => deleteMessage(message.id)}>Delete</button>
+                <Button variant="outlined" startIcon={<DeleteIcon />} onClick={() => deleteMessage(message.id)}>
+                    Delete
+                </Button>
+                
                 {isEditing ? (
                     <form onSubmit={(event) => {
                         event.preventDefault();
                         editMessage(message.id, editContent);
-                        setIsEditing(false);  // Edit is done, so stop editing
+                        setIsEditing(false);  
                     }}>
                         <input 
                             type="text" 
                             value={editContent}
                             onChange={event => setEditContent(event.target.value)}
                         />
-                        <button type="submit">SEND</button>
+                        <Button type="submit" variant="outlined" startIcon={<SendIcon/>}>Send</Button>
                     </form>
                 ) : (
-                    <button onClick={() => setIsEditing(true)}>Edit</button>
+                    <Button onClick={() => setIsEditing(true)} variant="outlined" startIcon={<SendIcon/>}>Edit</Button>
                 )}
             </div>
         </div>
