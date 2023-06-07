@@ -61,7 +61,7 @@ func (c *EditMessageController) Handle(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
+	fmt.Printf(m.Id, m.Content)
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "Message successfully updated")
 }
