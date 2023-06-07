@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
 
 export const LoginForm: React.FC = () => {
     
@@ -113,9 +114,7 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
                 <span className="message-content">{message.content}</span>
                 <span className="message-time">{message.time}</span>
                 <Box display="flex" justifyContent="space-between" width="200px">
-                <Button variant="outlined" startIcon={<DeleteIcon />} onClick={() => deleteMessage(message.id)}>
-                    
-                </Button>
+                <IconButton aria-label="delete" onClick={() => deleteMessage(message.id)}></IconButton>
                 
                 {isEditing ? (
                     <form onSubmit={(event) => {
