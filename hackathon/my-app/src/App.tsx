@@ -92,6 +92,38 @@ type Props = {
     setRefreshMessages: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+type EditableMessageProps = {
+    message: Message;
+    deleteMessage: (messageId: string) => void;
+    editMessage: (messageId: string, messageContent: string) => void;
+};
+
+const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessage, editMessage }) => {
+    const [editContent, setEditContent] = useState(message.content);
+
+    return (
+        <div key={message.time}>
+            <span className="user-name">{message.userid}</span>
+            <div className="content-time">
+                <span className="message-content">{message.content}</span>
+                <span className="message-time">{message.time}</span>
+                <button onClick={() => deleteMessage(message.id)}>Delete</button>
+                <form onSubmit={(event) => {
+                    event.preventDefault();
+                    editMessage(message.id, editContent);
+                }}>
+                    <input 
+                        type="text" 
+                        value={editContent}
+                        onChange={event => setEditContent(event.target.value)}
+                    />
+                    <button type="submit">SEND</button>
+                </form>
+            </div>
+        </div>
+    );
+};
+
 function ShowChannelMessage(props:Props) {
     const {activeChannel, setActiveChannel, refreshMessages, setRefreshMessages} = props
 
@@ -164,7 +196,6 @@ function ShowChannelMessage(props:Props) {
     
     return (
         <div className="showmessages">
-            
             <div className="channels">
             <h1>channel</h1>
                 {channels.map(channel => (
@@ -179,31 +210,15 @@ function ShowChannelMessage(props:Props) {
             </div>
                 
             <div className="messages">
-                <h1>talk</h1>    
-                {messages.map(message => {
-                    const [editContent, setEditContent] = useState(message.content);
-                    return (
-                        <div key={message.time}>
-                            <span className="user-name">{message.userid}</span>
-                            <div className ="content-time">
-                                <span className="message-content">{message.content}</span>
-                                <span className="message-time">{message.time}</span>
-                                <button onClick={() => deleteMessage(message.id)}>Delete</button>
-                                <form onSubmit={(event) => {
-                                    event.preventDefault();
-                                    EditMessage(message.id, editContent);
-                                }}>
-                                    <input 
-                                        type="text" 
-                                        value={editContent}
-                                        onChange={event => setEditContent(event.target.value)}
-                                    />
-                                    <button type ="submit">SEND</button>
-                                </form>
-                            </div>
-                        </div>
-                    );
-                })}
+            <h1>talk</h1>    
+                {messages.map(message => (
+                    <EditableMessage
+                        key={message.id}
+                        message={message}
+                        deleteMessage={deleteMessage}
+                        editMessage={EditMessage}
+                    />
+                ))}
             </div>
         </div>
     );
