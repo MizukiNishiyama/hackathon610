@@ -145,6 +145,21 @@ function ShowChannelMessage(props:Props) {
         }
     }
     
+    async function EditMessage(messageId: string, messageContent: string) {
+        console.log("編集するメッセージ", messageId, messageContent)
+        try {
+            const response = await fetch(`https://uttc-bapgglyr6q-uc.a.run.app/edit?id=${messageId}&content=${messageContent}`, {
+                method: 'POST',
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            // メッセージのリフレッシュを行うためのState更新（RefreshMessagesを切り替え）
+            setRefreshMessages(!refreshMessages);
+        } catch (error) {
+            console.error("An error occurred while deleting the message:", error);
+        }
+    }
     
     
     return (
@@ -172,6 +187,13 @@ function ShowChannelMessage(props:Props) {
                             <span className="message-content">{message.content}</span>
                             <span className="message-time">{message.time}</span>
                             <button onClick={() => deleteMessage(message.id)}>Delete</button>
+                            <form onSubmit={(event) => {
+                                event.preventDefault();
+                                EditMessage(message.id, message.content)
+                            }}>
+                                <input type="text" value={message.content} />
+                                <button type ="submit">SEND</button>
+                            </form>
                         </div>
                     </div>
                     
