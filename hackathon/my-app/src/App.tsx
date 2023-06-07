@@ -11,6 +11,7 @@ import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Box from '@mui/material/Box';
 
 export const LoginForm: React.FC = () => {
     
@@ -111,8 +112,9 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
             <div className="content-time">
                 <span className="message-content">{message.content}</span>
                 <span className="message-time">{message.time}</span>
+                <Box display="flex" justifyContent="space-between" width="200px">
                 <Button variant="outlined" startIcon={<DeleteIcon />} onClick={() => deleteMessage(message.id)}>
-                    Delete
+                    
                 </Button>
                 
                 {isEditing ? (
@@ -131,6 +133,7 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
                 ) : (
                     <Button onClick={() => setIsEditing(true)} variant="outlined" style={{ backgroundColor: 'green', color: 'white', borderRadius: '20px', fontSize:"10px"  }}>Edit</Button>
                 )}
+                </Box>
             </div>
         </div>
     );
