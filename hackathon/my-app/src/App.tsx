@@ -14,7 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import AppBar from '@mui/material/AppBar';
-
+import EditIcon from '@mui/icons-material/Edit';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
@@ -66,14 +66,6 @@ export const LoginForm: React.FC = () => {
     
   
     return (
-    //   <div className = "loginform" >
-    //     <button onClick={signInWithGoogle}>
-    //       Googleでログイン
-    //     </button>
-    //     <button onClick={signOutWithGoogle}>
-    //     ログアウト
-    //     </button>
-    //   </div>
       <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
@@ -81,7 +73,7 @@ export const LoginForm: React.FC = () => {
             Message Application
           </Typography>
           <Button color="inherit" onClick={signInWithGoogle}>Login</Button>
-          <Button color="inherit" onClick={signOutWithGoogle}>Login</Button>
+          <Button color="inherit" onClick={signOutWithGoogle}>Logout</Button>
         </Toolbar>
       </AppBar>
     </Box>
@@ -146,10 +138,11 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
                             value={editContent}
                             onChange={event => setEditContent(event.target.value)}
                         />
-                        <Button type="submit" variant="outlined"  style={{ backgroundColor: 'blue', color: 'white', borderRadius: '20px', fontSize:"10px" }}>Send</Button>
+                        <IconButton type="submit" aria-label="delete"><EditIcon /></IconButton>
+                        {/* <Button type="submit" variant="outlined"  style={{ backgroundColor: 'blue', color: 'white', borderRadius: '20px', fontSize:"10px" }}>Send</Button> */}
                     </form>
                 ) : (
-                    <Button onClick={() => setIsEditing(true)} variant="outlined" style={{ backgroundColor: 'green', color: 'white', borderRadius: '20px', fontSize:"10px"  }}>Edit</Button>
+                    <IconButton aria-label="edit" onClick={() => setIsEditing(true)}><SendIcon /></IconButton>
                 )}
                 </Box> 
                 
