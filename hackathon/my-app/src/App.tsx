@@ -9,6 +9,9 @@ import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 // //routing
 // import { BrowserRouter, Route} from 'react-router-dom';
 
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+
 export const LoginForm: React.FC = () => {
     
     const signInWithGoogle = (): void => {
@@ -252,7 +255,7 @@ function Sendmessage(props:Props) {
         try {
             const user = fireAuth.currentUser
             if (!user) {
-                alert("ユーザーがログインしていません。");
+                alert("ログインしてください");
                 return;
             }
             //const response = await fetch("http://localhost:3000/message")
@@ -286,7 +289,7 @@ function Sendmessage(props:Props) {
                         MESSAGE 
                         <input type="text" value={content} onChange={(e) => setContent(e.target.value)} />
                     </h1>  
-                    <button type ="submit">SEND</button>
+                    <Button type ="submit" variant="contained" endIcon={<SendIcon />} >SEND</Button>
                 </form>
             </div>
     )
