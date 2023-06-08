@@ -116,8 +116,8 @@ body {
 
 .showmessages .messages .message-content {
   font-size: 18px;
-  margin-left: 5px;
-  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .showmessages .messages .message-time {
