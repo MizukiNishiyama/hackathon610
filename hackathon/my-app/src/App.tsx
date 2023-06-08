@@ -240,6 +240,7 @@ function ShowChannelMessage(props:Props) {
         <div className="showmessages">
             <div className="channels">
             <div className='channel_label'>Channels</div>
+            <div className='channel_list'>
                 {channels.map(channel => (
                     <div
                         key={channel.id}
@@ -249,6 +250,8 @@ function ShowChannelMessage(props:Props) {
                         {channel.name}
                     </div>
                 ))}
+            </div>
+            <div className='addchannel'>   
                 {isEditing ? (
                     <form onSubmit={(event) => {
                         event.preventDefault();
@@ -264,6 +267,7 @@ function ShowChannelMessage(props:Props) {
                 ) : (
                     <IconButton color="primary" aria-label="add" onClick={() => setIsEditing(true)} size="small"><AddIcon /></IconButton>
                 )}
+            </div>    
             </div>
                 
             <div className="messages">

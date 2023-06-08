@@ -180,7 +180,6 @@ body {
   text-align: left;
 }
 
-.channels form{
-  margin-left: 5px;
-  align-items: center;
+.addchannel {
+  margin: 0 auto;
 }
