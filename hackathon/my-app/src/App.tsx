@@ -229,7 +229,7 @@ function ShowChannelMessage(props:Props) {
     return (
         <div className="showmessages">
             <div className="channels">
-            <div className='channel_label'>channels</div>
+            <div className='channel_label'>Channels</div>
                 {channels.map(channel => (
                     <div
                         key={channel.id}
@@ -307,7 +307,7 @@ function Sendmessage(props:Props) {
     return(
         <div className="sendmessages">
                 <form onSubmit={sendMessages}>
-                    <textarea value={content} onChange={(e) => setContent(e.target.value)} />
+                    <textarea placeholder="Type here!" value={content} onChange={(e) => setContent(e.target.value)} />
                     
                     <Button type ="submit" variant="contained" endIcon={<SendIcon />} >SEND</Button>
                 </form>

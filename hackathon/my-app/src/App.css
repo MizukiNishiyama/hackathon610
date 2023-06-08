@@ -67,7 +67,7 @@ body {
 .sendmessages {
   margin:20px;
   float:right;
-  /* width:70%; */
+  width:66%;
 }
 
 .showmessages h2 {
@@ -78,6 +78,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
 }
 
 .sendmessages textarea{
@@ -179,5 +180,5 @@ body {
 .channel_label {
   font-size: 25px;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
 }
