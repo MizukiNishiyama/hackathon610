@@ -67,7 +67,7 @@ body {
 .sendmessages {
   margin:20px;
   float:right;
-  width:70%;
+  /* width:70%; */
 }
 
 .showmessages h2 {
@@ -77,6 +77,7 @@ body {
 .sendmessages form {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .sendmessages input[type="text"] {
@@ -106,6 +107,7 @@ body {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+  height:60px;
 }
 
 .sendmessages button:hover {
