@@ -190,12 +190,13 @@ function ShowChannelMessage(props:Props) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    channel_name: channelname,
+                    channel_name: editchannelname,
                 }),
                 
             });
             const data = await response.json();
             console.log("success", data);
+            setEditchannelname("");
         } catch (error) {
             console.error("error:", error);
         }
