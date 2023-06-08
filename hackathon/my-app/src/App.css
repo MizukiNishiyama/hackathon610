@@ -116,12 +116,14 @@ body {
 
 .showmessages .messages .message-content {
   font-size: 18px;
-  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 10px;
 }
 
 .showmessages .messages .message-time {
   font-size: 12px;
   color: gray;
+  display: block;
 }
 
 .showmessages Button {
@@ -131,12 +133,13 @@ body {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
-  width:30px;
-  margin:5px;
+  /* width:30px; */
+  /* margin:5px; */
 }
 
 .showmessages button:hover {
-  background-color: red;
+  /* background-color: red; */
+  opacity: 0.7;
 }
 
 .loginform {
