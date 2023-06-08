@@ -7,7 +7,7 @@ body {
   display: flex;
   justify-content: space-between; /* ここでは、itemsが均等に間隔を空けて配置されます */
   width: 99%;
-  margin: 0;
+  margin: 20px 0px 15px 0px;
 }
 
 /* チャンネル一覧とメッセージ一覧の幅を調整 */
