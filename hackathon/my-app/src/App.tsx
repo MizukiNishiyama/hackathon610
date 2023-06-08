@@ -122,7 +122,7 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
             <div className="content-time">
                 <span className="message-content">{message.content}</span>
                 <span className="message-time">{message.time}</span>
-                <Box justifyContent="space-between" width="200px">
+                <Box justifyContent="space-between">
                 
                 <IconButton aria-label="delete" onClick={() => deleteMessage(message.id)}><DeleteIcon /></IconButton>
                    
@@ -139,7 +139,6 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
                             onChange={event => setEditContent(event.target.value)}
                         />
                         <IconButton type="submit" aria-label="send" size="small" ><SendIcon /></IconButton>
-                        {/* <Button type="submit" variant="outlined"  style={{ backgroundColor: 'blue', color: 'white', borderRadius: '20px', fontSize:"10px" }}>Send</Button> */}
                     </form>
                 ) : (
                     <IconButton aria-label="edit" onClick={() => setIsEditing(true)} size="small"><EditIcon /></IconButton>
@@ -177,11 +176,6 @@ function ShowChannelMessage(props:Props) {
                 setMessages([]);
                 return;
             }
-            if (activeChannel === "") {
-                alert("チャンネルを選択してください。");
-                return;
-            }
-            // const response = await fetch("http://localhost:3000/message?channelid=${activeChannel}");
             const response = await fetch(`https://uttc-bapgglyr6q-uc.a.run.app/message?channelid=${activeChannel}`);
             const data = await response.json();
             console.log("表示するメッセージ",data);
