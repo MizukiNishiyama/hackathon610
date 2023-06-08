@@ -153,6 +153,7 @@ function ShowChannelMessage(props:Props) {
     const [messages, setMessages] = useState<Message[]>([]);
     const [isEditing, setIsEditing] = useState(false);
     const [editchannelname, setEditchannelname] = useState("");
+    const [name, setName] = useState("")
     
     useEffect(() => {
         const fetchChannels = async () => {
