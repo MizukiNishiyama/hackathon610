@@ -180,7 +180,7 @@ function ShowChannelMessage(props:Props) {
         fetchMessages();
     }, [activeChannel, refreshMessages]);
     
-    async function editChannel(channelname:string ,e: React.FormEvent<HTMLFormElement>) {
+    const editChannel = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // setName=("")
         try {
@@ -251,7 +251,7 @@ function ShowChannelMessage(props:Props) {
                 {isEditing ? (
                     <form onSubmit={(event) => {
                         event.preventDefault();
-                        editChannel(channelname);
+                        editChannel;
                         setIsEditing(false);  
                     }}>
                         <textarea 
