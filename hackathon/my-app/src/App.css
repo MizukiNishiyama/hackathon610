@@ -172,3 +172,9 @@ body {
 .loginform button:hover {
   background-color: #2b6ed2;
 }
+
+.channel_label {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}

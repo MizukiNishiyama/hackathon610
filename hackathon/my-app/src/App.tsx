@@ -177,7 +177,7 @@ function ShowChannelMessage(props:Props) {
                 setMessages([]);
                 return;
             }
-            if (!activeChannel) {
+            if (activeChannel === "") {
                 alert("チャンネルを選択してください。");
                 return;
             }
@@ -242,7 +242,7 @@ function ShowChannelMessage(props:Props) {
             </div>
                 
             <div className="messages">
-            <div className='talk_label'>chat</div>    
+              
                 {messages.map(message => (
                     <EditableMessage
                         key={message.id}
