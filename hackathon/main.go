@@ -124,6 +124,16 @@ func main() {
 	getChannelController := &controller.GetChannelController{GetChannelUseCase: &usecase.GetChannelUseCase{ChannelDao: channelDao}}
 
 	http.HandleFunc("/channel", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+		w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
 		switch r.Method {
 		case http.MethodGet:
 			searchChannelController.Handle(w, r)
