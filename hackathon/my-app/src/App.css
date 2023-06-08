@@ -90,7 +90,7 @@ body {
 }
 
 .content-time textarea{
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   padding: 1rem;
   border: 1px solid #ddd;
   width:60%;
