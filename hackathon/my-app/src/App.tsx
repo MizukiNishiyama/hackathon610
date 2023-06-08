@@ -70,7 +70,7 @@ export const LoginForm: React.FC = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Message Application
+            MESSAGE APP
           </Typography>
           <Button color="inherit" onClick={signInWithGoogle}>Login</Button>
           <Button color="inherit" onClick={signOutWithGoogle}>Logout</Button>
@@ -133,8 +133,8 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
                         editMessage(message.id, editContent);
                         setIsEditing(false);  
                     }}>
-                        <input 
-                            type="text" 
+                        <textarea 
+                            // type="text" 
                             value={editContent}
                             onChange={event => setEditContent(event.target.value)}
                         />
@@ -309,7 +309,7 @@ function Sendmessage(props:Props) {
                 <form onSubmit={sendMessages}>
                     <div className='Message_label'>
                         MESSAGE 
-                        <input type="text" value={content} onChange={(e) => setContent(e.target.value)} />
+                        <textarea value={content} onChange={(e) => setContent(e.target.value)} />
                     </div>  
                     <Button type ="submit" variant="contained" endIcon={<SendIcon />} >SEND</Button>
                 </form>
