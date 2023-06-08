@@ -250,9 +250,9 @@ function ShowChannelMessage(props:Props) {
                 ))}
                 {isEditing ? (
                     <form onSubmit={(event) => {
-                        event.preventDefault()
-                        editChannel
-                        setIsEditing(false)
+                        event.preventDefault();
+                        editChannel(event);
+                        setIsEditing(false);  
                     }}>
                         <textarea 
                             value={editchannelname}
