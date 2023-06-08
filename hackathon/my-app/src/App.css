@@ -104,39 +104,39 @@ body {
 }
 
 .showmessages .messages div {
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
   margin-bottom: 20px;
 }
 
 .showmessages .messages .user-name {
-  font-size: 9px;
+  font-size: 12px;
   margin-bottom: 5px;
 }
 
 .showmessages .messages .message-content {
-  font-size: 15px;
+  font-size: 18px;
   margin-bottom: 5px;
 }
 
 .showmessages .messages .message-time {
-  font-size: 9px;
+  font-size: 12px;
   color: gray;
 }
 
 .showmessages Button {
   padding: 0.5rem;
-  background-color: red;
-  color: white;
+  /* background-color: red; */
+  /* color: white; */
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
-  width:50px;
+  width:30px;
   margin:5px;
 }
 
 .showmessages button:hover {
-  background-color: #ad0808;
+  background-color: red;
 }
 
 .loginform {
