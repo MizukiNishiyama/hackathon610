@@ -122,11 +122,8 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
             <div className="content-time">
                 <span className="message-content">{message.content}</span>
                 <span className="message-time">{message.time}</span>
-                <Box justifyContent="space-between">
-                
+                <Box justifyContent="space-between">                
                 <IconButton aria-label="delete" onClick={() => deleteMessage(message.id)}><DeleteIcon /></IconButton>
-                   
-                
                 {isEditing ? (
                     <form onSubmit={(event) => {
                         event.preventDefault();
@@ -134,7 +131,6 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
                         setIsEditing(false);  
                     }}>
                         <textarea 
-                            // type="text" 
                             value={editContent}
                             onChange={event => setEditContent(event.target.value)}
                         />
@@ -161,7 +157,6 @@ function ShowChannelMessage(props:Props) {
     
     useEffect(() => {
         const fetchChannels = async () => {
-            // const response = await fetch("http://localhost:3000/getchannels");
             const response = await fetch('https://uttc-bapgglyr6q-uc.a.run.app/getchannels');
             const data = await response.json();
             console.log("表示するチャンネル",data);
@@ -196,8 +191,8 @@ function ShowChannelMessage(props:Props) {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            // メッセージのリフレッシュを行うためのState更新（RefreshMessagesを切り替え）
             setRefreshMessages(!refreshMessages);
+            alert("メッセージを削除しました。");
         } catch (error) {
             console.error("An error occurred while deleting the message:", error);
         }
@@ -212,8 +207,8 @@ function ShowChannelMessage(props:Props) {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            // メッセージのリフレッシュを行うためのState更新（RefreshMessagesを切り替え）
             setRefreshMessages(!refreshMessages);
+            alert("メッセージを編集しました。");
         } catch (error) {
             console.error("An error occurred while deleting the message:", error);
         }
