@@ -153,7 +153,7 @@ function ShowChannelMessage(props:Props) {
     const [messages, setMessages] = useState<Message[]>([]);
     const [isEditing, setIsEditing] = useState(false);
     const [editchannelname, setEditchannelname] = useState("");
-    const [name, setName] = useState("")
+    const [channelname, setName] = useState("")
     
     useEffect(() => {
         const fetchChannels = async () => {
@@ -180,7 +180,9 @@ function ShowChannelMessage(props:Props) {
         fetchMessages();
     }, [activeChannel, refreshMessages]);
     
-    async function editChannel(channelname:string) {
+    async function editChannel(channelname:string ,e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        // setName=("")
         try {
             const response = await fetch("https://uttc-bapgglyr6q-uc.a.run.app/channel", {
                 method: "POST",
