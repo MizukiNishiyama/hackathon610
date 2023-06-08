@@ -227,32 +227,32 @@ function ShowChannelMessage(props:Props) {
     
     
     return (
-        <div className="showmessages">
-            <div className="channels">
-            <h1>channel</h1>
-                {channels.map(channel => (
-                    <div
-                        key={channel.id}
-                        onClick={() =>  setActiveChannel(channel.id)}
-                        className={activeChannel === channel.id ? 'active' : ''}
-                    >
-                        {channel.name}
-                    </div>
-                ))}
-            </div>
+        <Box className="showmessages" sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', width: '50%', height: '100%' }}>
+            <Box className="channels" sx={{ width: '30%', height: '100%', overflowY: 'auto' }}>
+                <h1>channel</h1>
+                    {channels.map(channel => (
+                        <div
+                            key={channel.id}
+                            onClick={() =>  setActiveChannel(channel.id)}
+                            className={activeChannel === channel.id ? 'active' : ''}
+                        >
+                            {channel.name}
+                        </div>
+                    ))}
+            </Box>
                 
-            <div className="messages">
-            <h1>talk</h1>    
-                {messages.map(message => (
-                    <EditableMessage
-                        key={message.id}
-                        message={message}
-                        deleteMessage={deleteMessage}
-                        editMessage={EditMessage}
-                    />
-                ))}
-            </div>
-        </div>
+            <Box className="messages" sx={{ width: '70%', height: '100%', overflowY: 'auto' }}>
+                <h1>talk</h1>    
+                    {messages.map(message => (
+                        <EditableMessage
+                            key={message.id}
+                            message={message}
+                            deleteMessage={deleteMessage}
+                            editMessage={EditMessage}
+                        />
+                    ))}
+            </Box>
+        </Box>
     );
 }
 
@@ -305,7 +305,7 @@ function Sendmessage(props:Props) {
     };
  
     return(
-        <div className="sendmessages">
+        <Box className="sendmessages" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '50%', height: '100%' }}>
                 <form onSubmit={sendMessages}>
                     <h1>
                         MESSAGE 
@@ -313,7 +313,7 @@ function Sendmessage(props:Props) {
                     </h1>  
                     <Button type ="submit" variant="contained" endIcon={<SendIcon />} >SEND</Button>
                 </form>
-            </div>
+        </Box>
     )
 }
 
@@ -339,12 +339,13 @@ function App() {
     const [refreshMessages, setRefreshMessages] = useState<boolean>(false);
     return (
         // <BrowserRouter>
-                <div className="App">
+                <Box className="App" sx={{ display: 'flex', flexDirection: 'row', height: '100vh' }}>
+
                     <LoginForm /> 
                     <ShowChannelMessage activeChannel={activeChannel} setActiveChannel={setActiveChannel} setRefreshMessages={setRefreshMessages} refreshMessages={refreshMessages}/>
                     <Sendmessage activeChannel={activeChannel} setActiveChannel={setActiveChannel} setRefreshMessages={setRefreshMessages} refreshMessages={refreshMessages}/>     
                                 
-                </div>
+                </Box>
         // </BrowserRouter>
     );
 }
