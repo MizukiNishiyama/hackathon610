@@ -6,8 +6,8 @@ body {
 .showmessages {
   display: flex;
   justify-content: space-between; /* ここでは、itemsが均等に間隔を空けて配置されます */
-  width: 80%;
-  margin: 0 auto;
+  width: 95%;
+  margin: 0;
 }
 
 /* チャンネル一覧とメッセージ一覧の幅を調整 */

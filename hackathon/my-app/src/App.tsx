@@ -307,10 +307,10 @@ function Sendmessage(props:Props) {
     return(
         <div className="sendmessages">
                 <form onSubmit={sendMessages}>
-                    <h1>
+                    <div className='Message_label'>
                         MESSAGE 
                         <input type="text" value={content} onChange={(e) => setContent(e.target.value)} />
-                    </h1>  
+                    </div>  
                     <Button type ="submit" variant="contained" endIcon={<SendIcon />} >SEND</Button>
                 </form>
             </div>
