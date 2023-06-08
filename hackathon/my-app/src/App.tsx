@@ -180,7 +180,7 @@ function ShowChannelMessage(props:Props) {
         fetchMessages();
     }, [activeChannel, refreshMessages]);
     
-    async function editChannel(name:string) {
+    async function editChannel(channelname:string) {
         try {
             const response = await fetch("https://uttc-bapgglyr6q-uc.a.run.app/channel", {
                 method: "POST",
@@ -188,7 +188,7 @@ function ShowChannelMessage(props:Props) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    name: name,
+                    channel_name: channelname,
                 }),
                 
             });
@@ -249,7 +249,7 @@ function ShowChannelMessage(props:Props) {
                 {isEditing ? (
                     <form onSubmit={(event) => {
                         event.preventDefault();
-                        editChannel(name);
+                        editChannel(channelname);
                         setIsEditing(false);  
                     }}>
                         <textarea 
