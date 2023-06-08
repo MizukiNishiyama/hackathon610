@@ -80,7 +80,7 @@ body {
   align-items: center;
 }
 
-.sendmessages input[type="text"] {
+.sendmessages textarea{
   margin: 7px 25px 25px 25px;
   padding: 0.5rem;
   border: 1px solid black;
@@ -88,7 +88,7 @@ body {
   height: 80px;
 }
 
-.content-time input[type="text"] {
+.content-time textarea{
   margin-bottom: 2rem;
   padding: 1rem;
   border: 1px solid #ddd;
