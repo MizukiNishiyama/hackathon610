@@ -190,7 +190,7 @@ function ShowChannelMessage(props:Props) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    channel_name: editchannelname,
+                    Name: editchannelname,
                 }),
                 
             });
