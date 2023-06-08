@@ -17,8 +17,8 @@ import AppBar from '@mui/material/AppBar';
 import EditIcon from '@mui/icons-material/Edit';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import AddIcon from '@mui/icons-material/Add';
 
-import MenuIcon from '@mui/icons-material/Menu';
 
 export const LoginForm: React.FC = () => {
     
@@ -115,7 +115,6 @@ type EditableMessageProps = {
 const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessage, editMessage }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editContent, setEditContent] = useState(message.content);
-
     return (
         <div key={message.time}>
             <span className="user-name">{message.userid}</span>
@@ -134,7 +133,7 @@ const EditableMessage: React.FC<EditableMessageProps> = ({ message, deleteMessag
                             value={editContent}
                             onChange={event => setEditContent(event.target.value)}
                         />
-                        <IconButton type="submit" aria-label="send" size="small" ><SendIcon /></IconButton>
+                        <IconButton type="submit" aria-label="send" size="small"><SendIcon /></IconButton>
                     </form>
                 ) : (
                     <IconButton aria-label="edit" onClick={() => setIsEditing(true)} size="small"><EditIcon /></IconButton>
@@ -152,8 +151,8 @@ function ShowChannelMessage(props:Props) {
 
     const [channels, setChannels] = useState<Channel[]>([]);
     const [messages, setMessages] = useState<Message[]>([]);
-
-    
+    const [isEditing, setIsEditing] = useState(false);
+    const [editchannelname, setEditchannelname] = useState("");
     
     useEffect(() => {
         const fetchChannels = async () => {
@@ -177,10 +176,27 @@ function ShowChannelMessage(props:Props) {
             setMessages(data);
             
         };
-
         fetchMessages();
     }, [activeChannel, refreshMessages]);
     
+    async function editChannel() {
+        try {
+            const response = await fetch("https://uttc-bapgglyr6q-uc.a.run.app/channel", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: name,
+                }),
+                
+            });
+            const data = await response.json();
+            console.log("success", data);
+        } catch (error) {
+            console.error("error:", error);
+        }
+    }
 
     async function deleteMessage(messageId: string) {
         console.log("削除するメッセージ", messageId)
@@ -212,6 +228,7 @@ function ShowChannelMessage(props:Props) {
         } catch (error) {
             console.error("An error occurred while deleting the message:", error);
         }
+
     }
     
     
@@ -228,10 +245,24 @@ function ShowChannelMessage(props:Props) {
                         {channel.name}
                     </div>
                 ))}
+                {isEditing ? (
+                    <form onSubmit={(event) => {
+                        event.preventDefault();
+                        editChannel();
+                        setIsEditing(false);  
+                    }}>
+                        <textarea 
+                            value={editchannelname}
+                            onChange={event => setEditchannelname(event.target.value)}
+                        />
+                        <IconButton type="submit" aria-label="send" size="small" ><SendIcon /></IconButton>
+                    </form>
+                ) : (
+                    <IconButton aria-label="edit" onClick={() => setIsEditing(true)} size="small"><EditIcon /></IconButton>
+                )}
             </div>
                 
             <div className="messages">
-              
                 {messages.map(message => (
                     <EditableMessage
                         key={message.id}
