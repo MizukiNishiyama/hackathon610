@@ -229,7 +229,7 @@ function ShowChannelMessage(props:Props) {
     return (
         <div className="showmessages">
             <div className="channels">
-            <h1>channel</h1>
+            <div className='channel_label'>channels</div>
                 {channels.map(channel => (
                     <div
                         key={channel.id}
@@ -242,7 +242,7 @@ function ShowChannelMessage(props:Props) {
             </div>
                 
             <div className="messages">
-            <h1>talk</h1>    
+            <div className='talk_label'>chat</div>    
                 {messages.map(message => (
                     <EditableMessage
                         key={message.id}
