@@ -65,7 +65,9 @@ body {
 } */
 
 .sendmessages {
-  margin:15px 3px 10px 480px
+  margin:20px;
+  float:right;
+  width:70%;
 }
 
 .showmessages h2 {
