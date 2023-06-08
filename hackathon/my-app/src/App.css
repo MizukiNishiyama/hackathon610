@@ -67,7 +67,7 @@ body {
 .sendmessages {
   margin:20px;
   float:right;
-  width:66%;
+  width:65%;
 }
 
 .showmessages h2 {
@@ -94,7 +94,7 @@ body {
   padding: 1rem;
   border: 1px solid #ddd;
   width:60%;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 

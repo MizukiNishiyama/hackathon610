@@ -273,7 +273,10 @@ function Sendmessage(props:Props) {
             alert("メッセージを入力してください。");
             return;
         }
-
+        if (activeChannel === "") {
+            alert("チャンネルを選択してください。");
+            return;
+        }
         try {
             const user = fireAuth.currentUser
             if (!user) {
