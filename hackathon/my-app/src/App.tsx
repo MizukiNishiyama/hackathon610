@@ -70,7 +70,7 @@ export const LoginForm: React.FC = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            MESSAGE APP
+            Message Application
           </Typography>
           <Button color="inherit" onClick={signInWithGoogle}>Login</Button>
           <Button color="inherit" onClick={signOutWithGoogle}>Logout</Button>
