@@ -179,3 +179,8 @@ body {
   font-weight: bold;
   text-align: left;
 }
+
+.channels form{
+  margin-left: 5px;
+  align-items: center;
+}
