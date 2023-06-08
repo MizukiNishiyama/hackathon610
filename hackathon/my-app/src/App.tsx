@@ -180,7 +180,7 @@ function ShowChannelMessage(props:Props) {
         fetchMessages();
     }, [activeChannel, refreshMessages]);
     
-    async function editChannel() {
+    async function editChannel(name:string) {
         try {
             const response = await fetch("https://uttc-bapgglyr6q-uc.a.run.app/channel", {
                 method: "POST",
@@ -249,7 +249,7 @@ function ShowChannelMessage(props:Props) {
                 {isEditing ? (
                     <form onSubmit={(event) => {
                         event.preventDefault();
-                        editChannel();
+                        editChannel(name);
                         setIsEditing(false);  
                     }}>
                         <textarea 
