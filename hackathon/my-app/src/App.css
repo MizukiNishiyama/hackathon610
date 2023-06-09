@@ -86,7 +86,6 @@ body {
 
 
 .sendmessages button {
-  padding: 0.5rem;
   background-color: #007bff;
   color: white;
   border: none;
@@ -100,8 +99,6 @@ body {
 }
 
 .showmessages .messages div {
-  /* display: flex; */
-  /* flex-direction: column; */
   margin-bottom: 20px;
   margin-top:3px
 }
@@ -133,7 +130,6 @@ body {
 }
 
 .showmessages button:hover {
-  /* background-color: red; */
   opacity: 0.8;
 }
 
