@@ -197,6 +197,7 @@ function ShowChannelMessage(props:Props) {
             const data = await response.json();
             console.log("success", data);
             setEditchannelname("");
+            alert("チャンネルを追加しました。リロードしてください。");
         } catch (error) {
             console.error("error:", error);
         }

@@ -183,3 +183,6 @@ body {
 .addchannel {
   margin: 0 auto;
 }
+.addchannel form{
+  display: flex;
+}
