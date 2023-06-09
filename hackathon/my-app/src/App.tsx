@@ -178,6 +178,13 @@ function ShowChannelMessage(props:Props) {
             
         };
         fetchMessages();
+        
+        useEffect(() => {
+        const interval =setInterval(() => {
+            window.location.reload();
+        }, 5000);
+        return () => clearInterval(interval);
+    }, []);
     }, [activeChannel, refreshMessages]);
     
     const editChannel = async (e: React.FormEvent<HTMLFormElement>) => {
