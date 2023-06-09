@@ -268,7 +268,7 @@ function ShowChannelMessage(props:Props) {
                     </form>
                 ) : (
                     // <IconButton color="primary" aria-label="add" onClick={() => setIsEditing(true)} size="small"><AddIcon /></IconButton>
-                    <Button size="large" color="primary" variant="contained" endIcon={<AddIcon />} onClick={() => setIsEditing(true)}>Make New Channel</Button>
+                    <Button size="large" color="primary" variant="outlined" endIcon={<AddIcon />} onClick={() => setIsEditing(true)}>Make New Channel</Button>
                 )}
             </div>    
             </div>
