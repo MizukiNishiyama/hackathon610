@@ -264,7 +264,7 @@ function ShowChannelMessage(props:Props) {
                             value={editchannelname}
                             onChange={event => setEditchannelname(event.target.value)}
                         />
-                        <IconButton type="submit" aria-label="send" size="small" ><SendIcon /></IconButton>
+                        <IconButton color="primary" type="submit" aria-label="send" size="small" ><SendIcon /></IconButton>
                     </form>
                 ) : (
                     // <IconButton color="primary" aria-label="add" onClick={() => setIsEditing(true)} size="small"><AddIcon /></IconButton>
