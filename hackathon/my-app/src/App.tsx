@@ -259,14 +259,16 @@ function ShowChannelMessage(props:Props) {
                         editChannel(event);
                         setIsEditing(false);  
                     }}>
-                        <textarea 
+                        <textarea
+                            placeholder="Enter the name of new channel..." 
                             value={editchannelname}
                             onChange={event => setEditchannelname(event.target.value)}
                         />
                         <IconButton type="submit" aria-label="send" size="small" ><SendIcon /></IconButton>
                     </form>
                 ) : (
-                    <IconButton color="primary" aria-label="add" onClick={() => setIsEditing(true)} size="small"><AddIcon /></IconButton>
+                    // <IconButton color="primary" aria-label="add" onClick={() => setIsEditing(true)} size="small"><AddIcon /></IconButton>
+                    <Button color="primary" variant="contained" endIcon={<AddIcon />} onClick={() => setIsEditing(true)}>Make New Channel</Button>
                 )}
             </div>    
             </div>
@@ -312,7 +314,6 @@ function Sendmessage(props:Props) {
                 alert("ログインしてください");
                 return;
             }
-            //const response = await fetch("http://localhost:3000/message")
             const response = await fetch("https://uttc-bapgglyr6q-uc.a.run.app/message", {
                 method: "POST",
                 headers: {
