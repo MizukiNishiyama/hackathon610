@@ -39,6 +39,6 @@ func (dao *MessageDao) DeleteMessage(id string) error {
 }
 
 func (dao *MessageDao) EditMessage(id, content string) error {
-	_, err := dao.DB.Exec("UPDATE message SET message_content = ? WHERE message_id = ?", content, id)
+	_, err := dao.DB.Exec("UPDATE message SET message_content = CONCAT(message_content, ' 編集済み') WHERE message_id = ?", id)
 	return err
 }

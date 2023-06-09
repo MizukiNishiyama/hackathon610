@@ -12,13 +12,13 @@ body {
 
 /* チャンネル一覧とメッセージ一覧の幅を調整 */
 .channels {
-  flex: 1;  /* flex-grow を使って残りのスペースを均等に分割 */
-  margin-right: 1rem; /* メッセージ一覧との間に余白を設ける */
+  flex: 1;  
+  margin-right: 1rem; 
 }
 
 
 .messages {
-  flex: 2;  /* flex-grow を使って残りのスペースを均等に分割 */
+  flex: 2;  
   border: 1px solid #ddd;
   padding: 1rem;
   height: 500px;
@@ -34,17 +34,6 @@ body {
   border-radius: 4px;
 }
 
-/* .showmessages {
-  width: 80%;
-  margin: 0 auto;
-} */
-
-/* .channels {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2rem;
-} */
-
 .channel_list div {
   cursor: pointer;
   padding: 1rem;
@@ -56,13 +45,6 @@ body {
 .channels div.active {
   background-color: #f0f0f0;
 }
-
-/* .messages {
-  border: 1px solid #ddd;
-  padding: 1rem;
-  height: 250px;
-  overflow-y: scroll;
-} */
 
 .sendmessages {
   margin:20px;
