@@ -64,6 +64,18 @@ export const LoginForm: React.FC = () => {
         });
       };
     
+    // fucntion loginname() {
+    //     const [user, setUser]=useState(null);
+    //     useEffect(() => {
+    //         fireAuth.onAuthStateChanged(function (user) {
+    //             if (user) {
+    //                 setUser(user);
+    //             } else {
+    //                 setUser(null);
+    //             }
+    //         });
+    //     },[]);
+    // }
   
     return (
       <Box sx={{ flexGrow: 1 }}>
@@ -74,6 +86,9 @@ export const LoginForm: React.FC = () => {
           </Typography>
           <Button color="inherit" onClick={signInWithGoogle}>Login</Button>
           <Button color="inherit" onClick={signOutWithGoogle}>Logout</Button>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            {fireAuth.currentUser ? fireAuth.currentUser.displayName:""}
+          </Typography>
         </Toolbar>
       </AppBar>
     </Box>
