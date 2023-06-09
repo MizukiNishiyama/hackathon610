@@ -198,10 +198,6 @@ function ShowChannelMessage(props:Props) {
             console.log("success", data);
             setEditchannelname("");
             alert("チャンネルを追加しました。リロードしてください。");
-            if (!editchannelname) {
-                alert("メッセージを入力してください。");
-                return;
-            }
         } catch (error) {
             console.error("error:", error);
         }
