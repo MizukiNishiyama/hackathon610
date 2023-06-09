@@ -167,14 +167,14 @@ body {
 }
 
 .addchannel {
-  margin: 1rem 1.5rem;
+  margin: 0 1rem;
   display: flex;
   flex-direction: row;
 }
 
 .addchannel form{
   display: flex;
-  margin: 25px;
+  margin: 15px;
   width: 90%;
 }
 .addchannel textarea{
