@@ -368,6 +368,14 @@ function Sendmessage(props:Props) {
 function App() {
     const [activeChannel, setActiveChannel] = useState<string>("");
     const [refreshMessages, setRefreshMessages] = useState<boolean>(false);
+    
+    useEffect(() => {
+        const interval =setInterval(() => {
+            window.location.reload();
+        }, 5000);
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         // <BrowserRouter>
                 <div className="App">
