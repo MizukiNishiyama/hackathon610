@@ -45,7 +45,7 @@ body {
   margin-bottom: 2rem;
 } */
 
-.channel_list {
+.channels div {
   cursor: pointer;
   padding: 1rem;
   border-bottom: 1px solid #ddd;
@@ -187,3 +187,6 @@ body {
   display: flex;
 }
 
+.channel_list {
+  
+}
