@@ -84,9 +84,9 @@ export const LoginForm: React.FC = () => {
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             Message Application
           </Typography>
-          <Button color="inherit" onClick={signInWithGoogle}>Login</Button>
-          <Button color="inherit" onClick={signOutWithGoogle}>Logout</Button>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign:"right", fontSize:"10px"}}>
+          <Button color="inherit"  onClick={signInWithGoogle} sx={{ margin:"3px", bgcolor:"primary"}}>Login</Button>
+          <Button color="inherit"  onClick={signOutWithGoogle} sx={{ margin:"3px", bgcolor:"primary"}}>Logout</Button>
+          <Typography variant="h6" component="div" sx={{marginLeft:"20px" ,textAlign:"right", fontSize:"16px"}}>
             {fireAuth.currentUser ? fireAuth.currentUser.displayName:""}
           </Typography>
         </Toolbar>
