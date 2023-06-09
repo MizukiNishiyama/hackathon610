@@ -240,18 +240,17 @@ function ShowChannelMessage(props:Props) {
     return (
         <div className="showmessages">
             <div className="channels">
-                <div className='channel_label'>Channels</div>
-                <div className='channel_list'>
-                    {channels.map(channel => (
-                        <div
-                            key={channel.id}
-                            onClick={() =>  setActiveChannel(channel.id)}
-                            className={activeChannel === channel.id ? 'active' : ''}
-                        >
-                            {channel.name}
-                        </div>
-                    ))}
-                </div>
+            <div className='channel_label'>Channels</div>
+            <div className='channel_list'>
+                {channels.map(channel => (
+                    <div
+                        key={channel.id}
+                        onClick={() =>  setActiveChannel(channel.id)}
+                        className={activeChannel === channel.id ? 'active' : ''}
+                    >
+                        {channel.name}
+                    </div>
+                ))}
             </div>
             <div className='addchannel'>   
                 {isEditing ? (
@@ -269,10 +268,10 @@ function ShowChannelMessage(props:Props) {
                     </form>
                 ) : (
                     // <IconButton color="primary" aria-label="add" onClick={() => setIsEditing(true)} size="small"><AddIcon /></IconButton>
-                    <Button color="primary" variant="contained" endIcon={<AddIcon />} onClick={() => setIsEditing(true)}>Make New Channel</Button>
+                    <Button color="primary" variant="contained" endIcon={<AddIcon />} onClick={() => setIsEditing(true)}>Make New annel</Button>
                 )}
             </div>    
-            
+            </div>
                 
             <div className="messages">
                 {messages.map(message => (
