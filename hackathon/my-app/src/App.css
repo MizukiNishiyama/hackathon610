@@ -79,6 +79,11 @@ body {
   font-size: 12px;
 }
 
+.content-time form{
+  display: flex;
+  flex-direction: row;
+}
+
 
 .sendmessages button {
   padding: 0.5rem;
