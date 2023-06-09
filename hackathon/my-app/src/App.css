@@ -146,7 +146,7 @@ body {
   transition: background-color 0.3s;
   /* width:30px; */
   /* margin:5px; */
-  width: 100%;
+  width: 25%;
 }
 
 .showmessages button:hover {
@@ -184,7 +184,7 @@ body {
 }
 
 .addchannel {
-  margin: 0 25px;
+  margin: 10px 25px;
 
 }
 .addchannel form{
