@@ -158,6 +158,8 @@ function ShowChannelMessage(props:Props) {
             setChannels(data);
         };
         fetchChannels();
+        const intervalId = setInterval(fetchChannels, 4000); 
+        return () => clearInterval(intervalId);
     }, []);
 
     useEffect(() => {
