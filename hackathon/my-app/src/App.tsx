@@ -234,21 +234,42 @@ function ShowChannelMessage(props:Props) {
 
     }
     
-    
+    async function deleteChannel(channelId: string) {
+        console.log("削除するメッセージ", channelId)
+        try {
+            const response = await fetch(`https://uttc-bapgglyr6q-uc.a.run.app/delete_channel?id=${channelId}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            // setRefreshMessages(!refreshMessages);
+            alert("チャンネルを削除しました。");
+        } catch (error) {
+            console.error("An error occurred while deleting the message:", error);
+        }
+    }
+
     return (
         <div className="showmessages">
             <div className="channels">
             <div className='channel_label'>Channels</div>
             <div className='channel_list'>
+            <Box justifyContent="space-between">  
                 {channels.map(channel => (
+                <div key={channel.id}>
                     <div
-                        key={channel.id}
-                        onClick={() =>  setActiveChannel(channel.id)}
-                        className={activeChannel === channel.id ? 'active' : ''}
+                    onClick={() =>  setActiveChannel(channel.id)}
+                    className={activeChannel === channel.id ? 'active' : ''}
                     >
-                        {channel.name}
+                    {channel.name}
                     </div>
+                    <IconButton color="error" aria-label="delete" onClick={() => deleteChannel(channel.id)}>
+                    <DeleteIcon />
+                    </IconButton>
+                </div>
                 ))}
+            </Box>    
             </div>
             <div className='addchannel'>   
                 {isEditing ? (
