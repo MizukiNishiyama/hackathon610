@@ -11,3 +11,4 @@ type DeleteMessageUseCase struct {
 func (uc *DeleteMessageUseCase) DeleteMessage(id string) error {
 	return uc.MessageDao.DeleteMessage(id)
 }
+
