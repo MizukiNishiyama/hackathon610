@@ -173,7 +173,7 @@ function ShowChannelMessage(props:Props) {
             
         };
         fetchMessages();
-        const intervalId = setInterval(fetchMessages, 1000); 
+        const intervalId = setInterval(fetchMessages, 2000); 
         return () => clearInterval(intervalId);
     }, [activeChannel, refreshMessages]);
     
