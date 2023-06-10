@@ -52,6 +52,6 @@ func (dao *ChannelDao) Insert(channel model.Channel) error {
 }
 
 func (dao *ChannelDao) DeleteChannel(id string) error {
-	_, err := dao.DB.Exec("DELETE from message WHERE channel_id =?", id)
+	_, err := dao.DB.Exec("DELETE from channel WHERE channel_id =?", id)
 	return err
 }
