@@ -173,9 +173,7 @@ function ShowChannelMessage(props:Props) {
             
         };
         fetchMessages();
-        const intervalId = setInterval(fetchMessages, 10000); // 10秒ごとにfetchMessagesを実行
-
-        // コンポーネントのクリーンアップ時にインターバルをクリア
+        const intervalId = setInterval(fetchMessages, 3000); 
         return () => clearInterval(intervalId);
     }, [activeChannel, refreshMessages]);
     
