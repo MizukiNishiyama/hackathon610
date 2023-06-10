@@ -257,7 +257,7 @@ function ShowChannelMessage(props:Props) {
             <div className='channel_list'>
             <Box justifyContent="space-between">  
                     {channels.map(channel => (
-            <div key={channel.id} style={{ display: 'flex', alignItems: 'center' }}>
+            <div key={channel.id}>
                 <div
                 onClick={() =>  setActiveChannel(channel.id)}
                 className={activeChannel === channel.id ? 'active' : ''}
