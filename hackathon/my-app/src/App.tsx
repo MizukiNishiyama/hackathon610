@@ -173,10 +173,10 @@ function ShowChannelMessage(props:Props) {
             
         };
         fetchMessages();
-        const intervalId = setInterval(fetchMessages, 10000); // 10秒ごとにfetchMessagesを実行
+        // const intervalId = setInterval(fetchMessages, 10000); // 10秒ごとにfetchMessagesを実行
 
-        // コンポーネントのクリーンアップ時にインターバルをクリア
-        return () => clearInterval(intervalId);
+        // // コンポーネントのクリーンアップ時にインターバルをクリア
+        // return () => clearInterval(intervalId);
     }, [activeChannel, refreshMessages]);
     
     const editChannel = async (e: React.FormEvent<HTMLFormElement>) => {
