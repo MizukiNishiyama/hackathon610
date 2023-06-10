@@ -7,7 +7,6 @@ import { fireAuth } from "./firebase";
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 
 //material UI
-
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -23,14 +22,12 @@ import AddIcon from '@mui/icons-material/Add';
 export const LoginForm: React.FC = () => {
     
     const signInWithGoogle = (): void => {
-      // Google認証プロバイダを利用する
       const provider = new GoogleAuthProvider();
   
       signInWithPopup(fireAuth, provider)
         .then(res => {
             const user =res.user;
             alert("ログインユーザー: " + user.displayName);
-            // fetch("http://localhost:3000/user", {
             fetch("https://uttc-bapgglyr6q-uc.a.run.app/user", {
                 method: "POST",
                 headers: {
@@ -52,10 +49,6 @@ export const LoginForm: React.FC = () => {
             alert(errorMessage);
         })
     };
-  
-    /**
-     * ログアウトする
-     */
     const signOutWithGoogle = (): void => {
         signOut(fireAuth).then(() => {
           alert("ログアウトしました");
@@ -63,19 +56,6 @@ export const LoginForm: React.FC = () => {
           alert(err);
         });
       };
-    
-    // fucntion loginname() {
-    //     const [user, setUser]=useState(null);
-    //     useEffect(() => {
-    //         fireAuth.onAuthStateChanged(function (user) {
-    //             if (user) {
-    //                 setUser(user);
-    //             } else {
-    //                 setUser(null);
-    //             }
-    //         });
-    //     },[]);
-    // }
   
     return (
       <Box sx={{ flexGrow: 1 }}>
@@ -193,6 +173,10 @@ function ShowChannelMessage(props:Props) {
             
         };
         fetchMessages();
+        const intervalId = setInterval(fetchMessages, 10000); // 10秒ごとにfetchMessagesを実行
+
+        // コンポーネントのクリーンアップ時にインターバルをクリア
+        return () => clearInterval(intervalId);
     }, [activeChannel, refreshMessages]);
     
     const editChannel = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -282,7 +266,6 @@ function ShowChannelMessage(props:Props) {
                         <IconButton color="primary" type="submit" aria-label="send" size="small" ><SendIcon /></IconButton>
                     </form>
                 ) : (
-                    // <IconButton color="primary" aria-label="add" onClick={() => setIsEditing(true)} size="small"><AddIcon /></IconButton>
                     <Button size="large" color="primary" variant="outlined" endIcon={<AddIcon />} onClick={() => setIsEditing(true)}>Add Channel</Button>
                 )}
             </div>    
@@ -307,9 +290,6 @@ function ShowChannelMessage(props:Props) {
 function Sendmessage(props:Props) {
     const {activeChannel, refreshMessages, setRefreshMessages} = props
     const [content, setContent] = useState("")
-    
-    
-    
     const sendMessages = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(content);
@@ -326,7 +306,7 @@ function Sendmessage(props:Props) {
         try {
             const user = fireAuth.currentUser
             if (!user) {
-                alert("ログインしてください");
+                alert("ログインしてください。");
                 return;
             }
             const response = await fetch("https://uttc-bapgglyr6q-uc.a.run.app/message", {
@@ -383,9 +363,6 @@ function Sendmessage(props:Props) {
 function App() {
     const [activeChannel, setActiveChannel] = useState<string>("");
     const [refreshMessages, setRefreshMessages] = useState<boolean>(false);
-
-    alert("ログイン状態を確認してください。")
-
     return (
         // <BrowserRouter>
                 <div className="App">
