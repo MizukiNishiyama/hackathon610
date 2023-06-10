@@ -173,13 +173,12 @@ function ShowChannelMessage(props:Props) {
             
         };
         fetchMessages();
-        const intervalId = setInterval(fetchMessages, 3000); 
+        const intervalId = setInterval(fetchMessages, 1000); 
         return () => clearInterval(intervalId);
     }, [activeChannel, refreshMessages]);
     
     const editChannel = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // setName=("")
         try {
             const response = await fetch("https://uttc-bapgglyr6q-uc.a.run.app/channel", {
                 method: "POST",
