@@ -263,10 +263,13 @@ function ShowChannelMessage(props:Props) {
                 className={activeChannel === channel.id ? 'active' : ''}
                 >
                 {channel.name}
-                </div>
                 <IconButton color="error" aria-label="delete" onClick={() => deleteChannel(channel.id)}>
                 <DeleteIcon />
                 </IconButton>
+                </div>
+                {/* <IconButton color="error" aria-label="delete" onClick={() => deleteChannel(channel.id)}>
+                <DeleteIcon />
+                </IconButton> */}
             </div>
             ))}
             </Box>    
