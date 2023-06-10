@@ -256,19 +256,19 @@ function ShowChannelMessage(props:Props) {
             <div className='channel_label'>Channels</div>
             <div className='channel_list'>
             <Box justifyContent="space-between">  
-                {channels.map(channel => (
-                <div key={channel.id}>
-                    <div
-                    onClick={() =>  setActiveChannel(channel.id)}
-                    className={activeChannel === channel.id ? 'active' : ''}
-                    >
-                    {channel.name}
-                    </div>
-                    <IconButton color="error" aria-label="delete" onClick={() => deleteChannel(channel.id)}>
-                    <DeleteIcon />
-                    </IconButton>
+                    {channels.map(channel => (
+            <div key={channel.id} style={{ display: 'flex', alignItems: 'center' }}>
+                <div
+                onClick={() =>  setActiveChannel(channel.id)}
+                className={activeChannel === channel.id ? 'active' : ''}
+                >
+                {channel.name}
                 </div>
-                ))}
+                <IconButton color="error" aria-label="delete" onClick={() => deleteChannel(channel.id)}>
+                <DeleteIcon />
+                </IconButton>
+            </div>
+            ))}
             </Box>    
             </div>
             <div className='addchannel'>   
