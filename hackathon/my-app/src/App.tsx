@@ -158,8 +158,8 @@ function ShowChannelMessage(props:Props) {
             setChannels(data);
         };
         fetchChannels();
-        const intervalId = setInterval(fetchChannels, 4000); 
-        return () => clearInterval(intervalId);
+        // const intervalId = setInterval(fetchChannels, 4000); 
+        // return () => clearInterval(intervalId);
     }, []);
 
     useEffect(() => {
@@ -175,8 +175,8 @@ function ShowChannelMessage(props:Props) {
             
         };
         fetchMessages();
-        const intervalId = setInterval(fetchMessages, 3000); 
-        return () => clearInterval(intervalId);
+        // const intervalId = setInterval(fetchMessages, 3000); 
+        // return () => clearInterval(intervalId);
     }, [activeChannel, refreshMessages]);
     
     const editChannel = async (e: React.FormEvent<HTMLFormElement>) => {
